@@ -22,6 +22,11 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "nad.pflegepartner.ch" }],
+      "destination": "/nad.html"
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
       "destination": "/vitamine.html"
     },
