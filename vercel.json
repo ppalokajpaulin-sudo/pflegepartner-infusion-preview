@@ -7,6 +7,11 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "glutathion.pflegepartner.ch" }],
+      "destination": "/glutathion.html"
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
       "destination": "/vitamine.html"
     },
