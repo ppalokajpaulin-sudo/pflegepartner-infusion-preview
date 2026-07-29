@@ -27,6 +27,11 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "beauty.pflegepartner.ch" }],
+      "destination": "/beauty.html"
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
       "destination": "/vitamine.html"
     },
