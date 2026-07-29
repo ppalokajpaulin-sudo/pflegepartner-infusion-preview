@@ -4,6 +4,15 @@
       "source": "/",
       "has": [{ "type": "host", "value": "vital.pflegepartner.ch" }],
       "destination": "/vital.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
+      "destination": "/vitamine.html"
+    },
+    {
+      "source": "/",
+      "destination": "/vitamine.html"
     }
   ]
 }
