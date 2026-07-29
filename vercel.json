@@ -1,6 +1,11 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "leads.pflegepartner.ch" }],
+      "destination": "https://pflegepartner-leads-production.up.railway.app/"
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "leads.pflegepartner.ch" }],
       "destination": "https://pflegepartner-leads-production.up.railway.app/:path*"
