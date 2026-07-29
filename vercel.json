@@ -12,6 +12,11 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "recovery.pflegepartner.ch" }],
+      "destination": "/recovery.html"
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
       "destination": "/vitamine.html"
     },
