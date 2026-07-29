@@ -17,6 +17,11 @@
     },
     {
       "source": "/",
+      "has": [{ "type": "host", "value": "immune.pflegepartner.ch" }],
+      "destination": "/immune.html"
+    },
+    {
+      "source": "/",
       "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
       "destination": "/vitamine.html"
     },
