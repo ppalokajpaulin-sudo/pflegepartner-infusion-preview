@@ -444,7 +444,7 @@
                 <div class="form-section-title">⭐ Medizinische Voraussetzungen</div>
 
                 <div class="form-group">
-                    <label>Befinden Sie sich aktuell in ärztlicher Behandlung? *</label>
+                    <label>Sind Sie aktuell in ärztlicher Behandlung? *</label>
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" id="arzt-nein" name="arzt_behandlung" value="Nein" required>
@@ -454,8 +454,11 @@
                             <input type="radio" id="arzt-ja" name="arzt_behandlung" value="Ja">
                             <label for="arzt-ja">Ja</label>
                         </div>
+                        <div class="radio-option">
+                            <input type="radio" id="arzt-unsicher" name="arzt_behandlung" value="Bin mir nicht sicher">
+                            <label for="arzt-unsicher">Bin mir nicht sicher</label>
+                        </div>
                     </div>
-                    <input type="text" id="arzt-details" class="text-input-inline" name="arzt_details" placeholder="Kurz erläutern (optional)">
                 </div>
 
                 <div class="form-group">
@@ -469,8 +472,11 @@
                             <input type="radio" id="vorerkr-ja" name="vorerkrankungen" value="Ja">
                             <label for="vorerkr-ja">Ja</label>
                         </div>
+                        <div class="radio-option">
+                            <input type="radio" id="vorerkr-klaren" name="vorerkrankungen" value="Möchte ich im Gespräch klären">
+                            <label for="vorerkr-klaren">Möchte ich im Gespräch klären</label>
+                        </div>
                     </div>
-                    <input type="text" id="vorerkr-details" class="text-input-inline" name="vorerkrankungen_details" placeholder="Nämlich… (optional)">
                 </div>
 
                 <div class="form-group">
@@ -481,11 +487,14 @@
                             <label for="med-nein">Nein</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="med-ja" name="medikamente" value="Ja">
-                            <label for="med-ja">Ja</label>
+                            <input type="radio" id="med-regelmaessig" name="medikamente" value="Ja, regelmässig">
+                            <label for="med-regelmaessig">Ja, regelmässig</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-gelegentlich" name="medikamente" value="Nur gelegentlich">
+                            <label for="med-gelegentlich">Nur gelegentlich</label>
                         </div>
                     </div>
-                    <input type="text" id="med-details" class="text-input-inline" name="medikamente_details" placeholder="Nämlich… (optional)">
                 </div>
 
                 <div class="form-group">
