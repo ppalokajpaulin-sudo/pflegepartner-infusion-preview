@@ -30,9 +30,7 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: var(--font-body);
@@ -42,7 +40,6 @@
             font-size: 1.02rem;
         }
 
-        /* Header */
         .header {
             position: sticky;
             top: 0;
@@ -82,7 +79,6 @@
             transform: translateY(-2px);
         }
 
-        /* Hero Section */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -93,11 +89,7 @@
             margin: 0 auto;
         }
 
-        .hero-left {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+        .hero-left { display: flex; flex-direction: column; gap: 1.5rem; }
 
         .badge {
             display: inline-block;
@@ -120,15 +112,12 @@
             color: var(--pp-ink);
         }
 
-        .hero-left h1 .accent {
-            color: var(--pp-red);
-        }
+        .hero-left h1 .accent { color: var(--pp-red); }
 
         .hero-left p {
             font-size: 1.05rem;
             color: var(--pp-ink-soft);
             max-width: 34rem;
-            margin-top: 1.15rem;
         }
 
         .price-box {
@@ -186,76 +175,13 @@
             flex-shrink: 0;
         }
 
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.2rem;
-        }
+        .cta-group { display: flex; gap: 1rem; margin-top: 1.2rem; }
 
-        .cta-group .btn-primary {
-            flex: 1;
-            padding: 0.95rem 1.7rem;
-            font-size: 1.02rem;
-        }
+        .hero-right { display: flex; align-items: center; justify-content: center; }
 
-        /* Hero Right - 3D Visualization */
-        .hero-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .vitamins-section { padding: 4rem 2rem; background: var(--pp-rose-tint); max-width: 1160px; margin: 0 auto; }
 
-        .visualization-box {
-            width: 100%;
-            max-width: 400px;
-            aspect-ratio: 1;
-            background: linear-gradient(150deg, var(--pp-rose) 0%, var(--pp-rose-tint) 60%, #fff 100%);
-            border-radius: 20px;
-            padding: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--pp-shadow);
-            border: 1px solid var(--pp-line);
-        }
-
-        .body-svg-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        #bodySvg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .visualization-label {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--pp-red-deep);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Vitamin Section */
-        .vitamins-section {
-            padding: 4rem 2rem;
-            background: var(--pp-rose-tint);
-            max-width: 1160px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+        .section-header { text-align: center; margin-bottom: 3rem; }
 
         .section-header h2 {
             font-size: clamp(1.8rem, 5vw, 2.75rem);
@@ -284,20 +210,14 @@
             padding: 1.8rem;
             box-shadow: var(--pp-shadow);
             transition: all 0.25s ease;
-            cursor: pointer;
         }
 
         .vitamin-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 24px 60px -18px rgba(105, 8, 15, .35);
-            border-color: var(--pp-rose);
         }
 
-        .vitamin-icon {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
+        .vitamin-icon { font-size: 2.8rem; margin-bottom: 1rem; }
 
         .vitamin-card h3 {
             font-size: 1.2rem;
@@ -307,66 +227,149 @@
             color: var(--pp-ink);
         }
 
-        .vitamin-card p {
-            font-size: 0.95rem;
-            color: var(--pp-ink-soft);
-            margin-bottom: 1rem;
-        }
-
-        .benefits-list {
-            border-top: 1px solid var(--pp-line);
-            padding-top: 1rem;
-        }
-
-        .benefit-item {
-            font-size: 0.85rem;
-            color: var(--pp-ink-soft);
-            margin: 0.6rem 0;
-            padding-left: 1.2rem;
-            position: relative;
-        }
-
-        .benefit-item::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--pp-red);
-            font-weight: 700;
-        }
-
-        /* CTA Section */
-        .cta-section {
+        .form-section {
             padding: 4rem 2rem;
-            text-align: center;
             background: var(--pp-white);
-            border-top: 1px solid var(--pp-line);
             max-width: 1160px;
+            margin: 0 auto;
+            border-top: 1px solid var(--pp-line);
+        }
+
+        .form-container {
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .cta-section h2 {
+        .form-section h2 {
             font-size: 2.2rem;
             font-weight: 600;
             font-family: var(--font-head);
             margin-bottom: 1rem;
+            text-align: center;
             color: var(--pp-ink);
         }
 
-        .cta-section p {
-            font-size: 1rem;
+        .form-section p {
+            text-align: center;
             color: var(--pp-ink-soft);
             margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .cta-section .btn-primary {
-            padding: 0.95rem 1.7rem;
-            font-size: 1.02rem;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        /* Footer */
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--pp-ink);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--pp-line);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--pp-ink);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--pp-red);
+            box-shadow: 0 0 0 3px rgba(253, 41, 38, 0.1);
+        }
+
+        .form-section-title {
+            font-weight: 700;
+            color: var(--pp-red);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 0.9rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 0.9rem;
+        }
+
+        .text-input-inline {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid var(--pp-line);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--pp-red);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-family: var(--font-head);
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--pp-shadow);
+            transition: all 0.18s ease;
+            margin-top: 1rem;
+        }
+
+        .form-group button:hover {
+            background: var(--pp-red-bright);
+            transform: translateY(-2px);
+        }
+
         footer {
             padding: 2.4rem;
             background: var(--pp-cream);
@@ -382,10 +385,6 @@
                 gap: 2rem;
                 padding: 2.5rem 1.5rem;
             }
-
-            .cta-group {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
@@ -399,7 +398,7 @@
         <div class="hero-left">
             <div class="badge">Infusion bei dir zuhause</div>
             <h1>Vitaminpräparat auf <span class="accent">Mass</span></h1>
-            <p>Gezielte Einzelpräparate statt Kombiprodukt: Vitamin A, B-Vitamine, Vitamin C oder D — du wählst genau die Mikronährstoffe, die dein Körper braucht. Professionell verabreicht bei dir zuhause.</p>
+            <p>Gezielte Einzelpräparate statt Kombiprodukt: Vitamin A, B-Vitamine, Vitamin C oder D — du wählst genau die Mikronährstoffe, die dein Körper braucht.</p>
 
             <div class="price-box">
                 <div class="price">ab CHF 200.–</div>
@@ -419,154 +418,175 @@
         </div>
 
         <div class="hero-right">
-            <div class="visualization-box">
-                <img src="assets/body-visualization.jpg" alt="3D Body Visualization with Nervous and Vascular Systems" style="width: 100%; height: 100%; object-fit: contain; border-radius: 20px;">
-                        <defs>
-                            <filter id="glow-orange">
-                                <feGaussianBlur stdDeviation="6"/>
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                            <filter id="glow-red">
-                                <feGaussianBlur stdDeviation="7"/>
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                            <linearGradient id="nerveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1"/>
-                                <stop offset="50%" style="stop-color:#FFA500;stop-opacity:0.9"/>
-                                <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:0.8"/>
-                            </linearGradient>
-                            <linearGradient id="vesselGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1"/>
-                                <stop offset="50%" style="stop-color:#FD2926;stop-opacity:0.95"/>
-                                <stop offset="100%" style="stop-color:#D31A18;stop-opacity:0.9"/>
-                            </linearGradient>
-                        </defs>
-
-                        <g id="bodyGroup" transform="translate(200, 300)">
-                            <!-- Central Spinal Cord - Red/Orange -->
-                            <g filter="url(#glow-red)">
-                                <line x1="0" y1="-220" x2="0" y2="80" stroke="url(#vesselGradient)" stroke-width="8" stroke-linecap="round" opacity="0.95"/>
-                                <line x1="-2" y1="-220" x2="-2" y2="80" stroke="url(#vesselGradient)" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
-                                <line x1="2" y1="-220" x2="2" y2="80" stroke="url(#vesselGradient)" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
-                            </g>
-
-                            <!-- Brain Network -->
-                            <g filter="url(#glow-orange)">
-                                <line x1="0" y1="-240" x2="-40" y2="-200" stroke="url(#nerveGradient)" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="0" y1="-240" x2="40" y2="-200" stroke="url(#nerveGradient)" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="-40" y1="-200" x2="-50" y2="-170" stroke="url(#nerveGradient)" stroke-width="2"/>
-                                <line x1="40" y1="-200" x2="50" y2="-170" stroke="url(#nerveGradient)" stroke-width="2"/>
-                            </g>
-
-                            <!-- Nervous System -->
-                            <g filter="url(#glow-orange)">
-                                <line x1="0" y1="-130" x2="-80" y2="-100" stroke="url(#nerveGradient)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
-                                <line x1="0" y1="-130" x2="80" y2="-100" stroke="url(#nerveGradient)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
-                                <line x1="-80" y1="-100" x2="-120" y2="20" stroke="url(#nerveGradient)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                                <line x1="80" y1="-100" x2="120" y2="20" stroke="url(#nerveGradient)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                                <line x1="0" y1="-20" x2="-50" y2="0" stroke="url(#nerveGradient)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                                <line x1="0" y1="-20" x2="50" y2="0" stroke="url(#nerveGradient)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                                <line x1="0" y1="40" x2="-50" y2="100" stroke="url(#nerveGradient)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                                <line x1="0" y1="40" x2="50" y2="100" stroke="url(#nerveGradient)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                            </g>
-
-                            <!-- Vascular System - Red Pflegepartner -->
-                            <g filter="url(#glow-red)">
-                                <line x1="0" y1="-140" x2="0" y2="80" stroke="url(#vesselGradient)" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
-                                <line x1="0" y1="-180" x2="-35" y2="-160" stroke="url(#vesselGradient)" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-                                <line x1="0" y1="-180" x2="35" y2="-160" stroke="url(#vesselGradient)" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-                                <line x1="0" y1="-120" x2="-75" y2="-90" stroke="url(#vesselGradient)" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
-                                <line x1="0" y1="-120" x2="75" y2="-90" stroke="url(#vesselGradient)" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
-                                <line x1="-75" y1="-90" x2="-115" y2="10" stroke="url(#vesselGradient)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
-                                <line x1="75" y1="-90" x2="115" y2="10" stroke="url(#vesselGradient)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
-                                <line x1="0" y1="-30" x2="-45" y2="-10" stroke="url(#vesselGradient)" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
-                                <line x1="0" y1="-30" x2="45" y2="-10" stroke="url(#vesselGradient)" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
-                                <line x1="0" y1="50" x2="-50" y2="90" stroke="url(#vesselGradient)" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-                                <line x1="0" y1="50" x2="50" y2="90" stroke="url(#vesselGradient)" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-                            </g>
-
-                            <!-- Body outline -->
-                            <ellipse cx="0" cy="-200" rx="55" ry="60" fill="none" stroke="rgba(173, 48, 22, 0.1)" stroke-width="2"/>
-                            <ellipse cx="0" cy="-50" rx="75" ry="85" fill="none" stroke="rgba(173, 48, 22, 0.1)" stroke-width="2"/>
-                            <ellipse cx="0" cy="80" rx="65" ry="40" fill="none" stroke="rgba(173, 48, 22, 0.1)" stroke-width="2"/>
-
-                            <!-- Vitamin particles -->
-                            <g id="vitaminParticles"></g>
-                        </g>
-                    </svg>
-                </div>
-                <div class="visualization-label">Vitamine durch deinen Körper</div>
-            </div>
+            <div style="font-size: 3rem; opacity: 0.3;">💊</div>
         </div>
     </section>
 
     <section class="vitamins-section">
         <div class="section-header">
             <h2>Welche Vitamine brauchst du?</h2>
-            <p>Jedes Vitamin erfüllt eine wichtige Rolle in deinem Körper. Wir helfen dir, die richtigen Nährstoffe zu finden.</p>
+            <p>Jedes Vitamin erfüllt eine wichtige Rolle in deinem Körper.</p>
         </div>
 
         <div class="vitamins-grid">
             <div class="vitamin-card">
                 <span class="vitamin-icon">👁️</span>
                 <h3>Vitamin A</h3>
-                <p>Essentiell für deine Sehkraft, Immunabwehr und Hautgesundheit.</p>
-                <div class="benefits-list">
-                    <div class="benefit-item">Unterstützt die Augengesundheit</div>
-                    <div class="benefit-item">Stärkt das Immunsystem</div>
-                    <div class="benefit-item">Fördert gesunde Haut</div>
-                    <div class="benefit-item">Wichtig für Wachstum</div>
-                </div>
+                <p>Essentiell für deine Sehkraft und Hautgesundheit.</p>
             </div>
-
             <div class="vitamin-card">
                 <span class="vitamin-icon">⚡</span>
                 <h3>B-Vitamine</h3>
-                <p>Sorgen für Energie, unterstützen Nervensystem und Stoffwechsel.</p>
-                <div class="benefits-list">
-                    <div class="benefit-item">Erhöht Energielevel</div>
-                    <div class="benefit-item">Unterstützt den Stoffwechsel</div>
-                    <div class="benefit-item">Beruhigt das Nervensystem</div>
-                    <div class="benefit-item">Hilft bei Müdigkeit</div>
-                </div>
+                <p>Sorgen für Energie und unterstützen den Stoffwechsel.</p>
             </div>
-
             <div class="vitamin-card">
                 <span class="vitamin-icon">🛡️</span>
                 <h3>Vitamin C</h3>
-                <p>Der Immun-Booster: Stärkt dein Immunsystem und schützt vor Infektionen.</p>
-                <div class="benefits-list">
-                    <div class="benefit-item">Stärkt das Immunsystem</div>
-                    <div class="benefit-item">Wirkt als Antioxidans</div>
-                    <div class="benefit-item">Hilft bei Wundheilung</div>
-                    <div class="benefit-item">Beugt Erkältungen vor</div>
-                </div>
+                <p>Der Immun-Booster für dein Immunsystem.</p>
             </div>
-
             <div class="vitamin-card">
                 <span class="vitamin-icon">☀️</span>
                 <h3>Vitamin D</h3>
-                <p>Das «Sonnenvitamin»: Wichtig für starke Knochen und mentale Gesundheit.</p>
-                <div class="benefits-list">
-                    <div class="benefit-item">Stärkt die Knochen</div>
-                    <div class="benefit-item">Unterstützt Calciumaufnahme</div>
-                    <div class="benefit-item">Verbessert die Stimmung</div>
-                    <div class="benefit-item">Fördert Muskelkraft</div>
-                </div>
+                <p>Das «Sonnenvitamin» für starke Knochen.</p>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2>Starte deine Vitamin-Kur</h2>
-        <p>Lass dich von unserem Arzt beraten, welche Vitamine zu dir passen. Völlig kostenlos und unverbindlich — noch heute!</p>
-        <button class="btn-primary">Kostenlose Erstberatung Buchen</button>
+    <section class="form-section" id="anfrage">
+        <div class="form-container">
+            <h2>Kostenlose Erstberatung</h2>
+            <p>Ein paar kurze Angaben — dann melden wir uns noch heute</p>
+
+            <form id="lead-form">
+                <!-- PERSÖNLICHE INFOS -->
+                <div class="form-section-title">Persönliche Angaben</div>
+
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefon *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-Mail (optional)</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="plz">PLZ / Wohnort *</label>
+                    <input type="text" id="plz" name="plz" placeholder="z.B. 8184" required>
+                </div>
+
+                <!-- INFUSION WAHL -->
+                <div class="form-section-title">Deine Infusion</div>
+
+                <div class="form-group">
+                    <label for="infusion">Welche Infusion interessiert dich? *</label>
+                    <select id="infusion" name="infusion" required>
+                        <option value="">Bitte wählen…</option>
+                        <option value="Vitaminpräparat">Vitaminpräparat</option>
+                        <option value="Vital+">Vital+</option>
+                        <option value="Glutathion">Glutathion</option>
+                        <option value="Recovery">Recovery / Hangover-Boost</option>
+                        <option value="Immune Boost">Immune Boost</option>
+                        <option value="NAD+">NAD+</option>
+                        <option value="Beauty-Cocktail">Beauty-Cocktail (NAD+)</option>
+                        <option value="Noch unsicher">Noch unsicher — bitte beraten</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ziel">Dein Ziel / Anliegen *</label>
+                    <select id="ziel" name="ziel" required>
+                        <option value="">Bitte wählen…</option>
+                        <option value="Mehr Energie">Mehr Energie & Regeneration</option>
+                        <option value="Immunsystem">Immunsystem stärken</option>
+                        <option value="Anti-Aging">Anti-Aging & Longevity</option>
+                        <option value="Erholung">Erholung nach Sport oder Krankheit</option>
+                        <option value="Schönheit">Schönheit — Haut & Haare</option>
+                        <option value="Noch unsicher">Noch unsicher — bitte beraten</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="zeitraum">Wunschzeitraum *</label>
+                    <select id="zeitraum" name="zeitraum" required>
+                        <option value="">Bitte wählen…</option>
+                        <option value="So bald wie möglich">So bald wie möglich</option>
+                        <option value="Diese Woche">Diese Woche</option>
+                        <option value="Diesen Monat">Diesen Monat</option>
+                        <option value="Nur informieren">Nur informieren</option>
+                    </select>
+                </div>
+
+                <!-- ⭐ MEDIZINISCHE FRAGEN -->
+                <div class="form-section-title">⭐ Medizinische Voraussetzungen</div>
+
+                <div class="form-group">
+                    <label>Befinden Sie sich aktuell in ärztlicher Behandlung? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="arzt-nein" name="arzt_behandlung" value="Nein" required>
+                            <label for="arzt-nein">Nein</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="arzt-ja" name="arzt_behandlung" value="Ja">
+                            <label for="arzt-ja">Ja</label>
+                        </div>
+                    </div>
+                    <input type="text" id="arzt-details" class="text-input-inline" name="arzt_details" placeholder="Kurz erläutern (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label>Bestehen relevante Vorerkrankungen? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="vorerkr-nein" name="vorerkrankungen" value="Nein" required>
+                            <label for="vorerkr-nein">Nein</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="vorerkr-ja" name="vorerkrankungen" value="Ja">
+                            <label for="vorerkr-ja">Ja</label>
+                        </div>
+                    </div>
+                    <input type="text" id="vorerkr-details" class="text-input-inline" name="vorerkrankungen_details" placeholder="Nämlich… (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label>Nehmen Sie regelmässig Medikamente ein? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="med-nein" name="medikamente" value="Nein" required>
+                            <label for="med-nein">Nein</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-ja" name="medikamente" value="Ja">
+                            <label for="med-ja">Ja</label>
+                        </div>
+                    </div>
+                    <input type="text" id="med-details" class="text-input-inline" name="medikamente_details" placeholder="Nämlich… (optional)">
+                </div>
+
+                <!-- NACHRICHT & CONSENT -->
+                <div class="form-group">
+                    <label for="message">Weitere Anmerkungen (optional)</label>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">Ich bin einverstanden, dass meine Angaben zur Bearbeitung verwendet werden. Keine sensiblen Gesundheitsdaten ins Formular — Details klären wir persönlich.</label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Kostenlose Erstberatung anfragen</button>
+                </div>
+            </form>
+        </div>
     </section>
 
     <footer>
@@ -574,67 +594,10 @@
     </footer>
 
     <script>
-        const bodyGroup = document.getElementById('bodyGroup');
-        if (bodyGroup) {
-            bodyGroup.style.animation = 'rotate-body 30s linear infinite';
-        }
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rotate-body {
-                0% { transform: translate(200px, 300px) rotateY(0deg); }
-                100% { transform: translate(200px, 300px) rotateY(360deg); }
-            }
-            #bodyGroup { transform-style: preserve-3d; perspective: 1000px; }
-        `;
-        document.head.appendChild(style);
-
-        const particlesContainer = document.getElementById('vitaminParticles');
-        function createVitaminParticle(color = '#FD2926') {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            const startX = Math.random() * 100 - 50;
-            const startY = -170;
-            const size = Math.random() * 3 + 1.5;
-
-            circle.setAttribute('cx', startX);
-            circle.setAttribute('cy', startY);
-            circle.setAttribute('r', size);
-            circle.setAttribute('fill', color);
-            circle.style.opacity = '0.9';
-            circle.style.filter = `drop-shadow(0 0 ${size * 2}px ${color})`;
-
-            particlesContainer.appendChild(circle);
-
-            let startTime = Date.now();
-            let vx = (Math.random() - 0.5) * 20;
-            let vy = 140 + Math.random() * 60;
-            const duration = 3000 + Math.random() * 1500;
-
-            function animate() {
-                const elapsed = Date.now() - startTime;
-                const progress = elapsed / duration;
-
-                if (progress >= 1) {
-                    circle.remove();
-                    return;
-                }
-
-                circle.setAttribute('cx', startX + vx * progress);
-                circle.setAttribute('cy', startY + vy * progress);
-                circle.style.opacity = Math.cos(progress * Math.PI / 2) * 0.9;
-
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-        }
-
-        setInterval(() => {
-            if (particlesContainer.children.length < 40) {
-                const color = Math.random() > 0.5 ? '#FD2926' : '#FFB84D';
-                createVitaminParticle(color);
-            }
-        }, 150);
+        document.getElementById('lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Vielen Dank! Wir melden uns bald bei dir.\n\n044 525 02 20');
+        });
     </script>
 </body>
 </html>

@@ -1,524 +1,519 @@
 <!DOCTYPE html>
-<html lang="de-CH">
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vital+ Nährstoff-Infusion zuhause – CHF 249 | Pflegepartner AG</title>
-<meta name="description" content="Dein individueller Nährstoff-Boost: Gemeinsam mit unserem Arzt stellen wir die Kombination aus Vitaminen und Mineralstoffen zusammen, die dein Körper jetzt braucht — für Energie, Regeneration und ein starkes Immunsystem.">
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FD2926">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<script>document.documentElement.classList.add('js');</script>
-<!-- Tracking-Stubs: echte IDs kommen zentral vor Livegang (siehe index.html) -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
-  window.dataLayer.push({ event: "product_view", infusion: "Vital+" });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vital+ Infusion – Energie & Immunboost zuhause – Pflegepartner AG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pp-red: #FD2926;
+            --pp-red-bright: #D31A18;
+            --pp-red-deep: #AD3016;
+            --pp-rose: #DD9F9E;
+            --pp-rose-tint: #F9E6EA;
+            --pp-cream: #FDF9F7;
+            --pp-white: #FFFFFF;
+            --pp-ink: #2A2A2A;
+            --pp-ink-soft: #6B6360;
+            --pp-line: #F0E2DD;
+            --pp-shadow: 0 18px 50px -22px rgba(105, 8, 15, .28);
+            --font-head: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+            --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--pp-cream);
+            color: var(--pp-ink);
+            line-height: 1.6;
+            font-size: 1.02rem;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253, 249, 247, .88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--pp-line);
+            padding: 0.7rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--pp-ink);
+            font-family: var(--font-head);
+        }
+
+        .btn-primary {
+            background: var(--pp-red);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.25rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-family: var(--font-head);
+            cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: var(--pp-shadow);
+            transition: all 0.18s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--pp-red-bright);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.2rem;
+            align-items: center;
+            padding: 4.5rem 2rem;
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .hero-left { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .badge {
+            display: inline-block;
+            background: var(--pp-rose-tint);
+            color: var(--pp-red-deep);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            width: fit-content;
+        }
+
+        .hero-left h1 {
+            font-size: clamp(2.3rem, 7.5vw, 4rem);
+            font-family: var(--font-head);
+            font-weight: 600;
+            line-height: 1.12;
+            color: var(--pp-ink);
+        }
+
+        .hero-left h1 .accent { color: var(--pp-red); }
+
+        .hero-left p {
+            font-size: 1.05rem;
+            color: var(--pp-ink-soft);
+            max-width: 34rem;
+        }
+
+        .price-box {
+            background: var(--pp-white);
+            border: 1px solid var(--pp-line);
+            border-radius: 20px;
+            padding: 1.6rem;
+            box-shadow: var(--pp-shadow);
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-head);
+            background: linear-gradient(100deg, var(--pp-red) 42%, #ff9d8f 50%, var(--pp-red) 58%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price-desc {
+            font-size: 0.92rem;
+            color: var(--pp-ink-soft);
+            margin-top: 0.5rem;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--pp-ink);
+        }
+
+        .feature::before {
+            content: "✓";
+            width: 24px;
+            height: 24px;
+            background: var(--pp-red);
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cta-group { display: flex; gap: 1rem; margin-top: 1.2rem; }
+
+        .hero-right { display: flex; align-items: center; justify-content: center; }
+
+        .form-section {
+            padding: 4rem 2rem;
+            background: var(--pp-white);
+            max-width: 1160px;
+            margin: 0 auto;
+            border-top: 1px solid var(--pp-line);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-section h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            font-family: var(--font-head);
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--pp-ink);
+        }
+
+        .form-section p {
+            text-align: center;
+            color: var(--pp-ink-soft);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--pp-ink);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--pp-line);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--pp-ink);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--pp-red);
+            box-shadow: 0 0 0 3px rgba(253, 41, 38, 0.1);
+        }
+
+        .form-section-title {
+            font-weight: 700;
+            color: var(--pp-red);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 0.9rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 0.9rem;
+        }
+
+        .text-input-inline {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid var(--pp-line);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--pp-red);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-family: var(--font-head);
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--pp-shadow);
+            transition: all 0.18s ease;
+            margin-top: 1rem;
+        }
+
+        .form-group button:hover {
+            background: var(--pp-red-bright);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            padding: 2.4rem;
+            background: var(--pp-cream);
+            border-top: 1px solid var(--pp-line);
+            text-align: center;
+            color: var(--pp-ink-soft);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-<header class="site-header">
-  <div class="wrap site-header__inner">
-    <a href="index.html#top" class="brand" aria-label="Pflegepartner AG — Startseite">
-      <img class="brand__logo" src="assets/img/logo-icon.png" alt="" aria-hidden="true">
-      <span class="brand__name">Pflegepartner<span>Infusionen zuhause</span></span>
-    </a>
-    <nav class="nav" aria-label="Hauptnavigation">
-      <a href="index.html#warum">Warum zuhause</a>
-      <a href="index.html#infusionen">Alle Infusionen</a>
-      <a href="index.html#team">Team</a>
-      <a href="index.html#faq">FAQ</a>
-    </nav>
-    <div class="site-header__cta">
-      <a href="tel:+41445250220" class="header-phone">044 525 02 20</a>
-      <a href="#anfrage" class="btn btn--primary" data-scroll>Jetzt anfragen</a>
-    </div>
-  </div>
-</header>
+    <header class="header">
+        <div class="logo">🏥 Pflegepartner</div>
+        <button class="btn-primary">Jetzt Anfragen</button>
+    </header>
 
-<main id="top">
+    <section class="hero">
+        <div class="hero-left">
+            <div class="badge">Infusion bei dir zuhause</div>
+            <h1>Vital<span class="accent">+</span></h1>
+            <p>Energie, Vitalität und starkes Immunsystem: Die perfekte Kombination von B-Vitaminen, Vitamin C und Elektrolyten für deine beste Performance.</p>
 
-  <!-- Produkt-Hero -->
-  <section class="hero p-hero">
-    <div class="wrap hero__grid">
-      <div class="hero__copy stagger">
-        <span class="eyebrow">
-          <svg class="house" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 14 L50 30 V50 H14 V30 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/><path d="M32 32 v12 M26 38 h12" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
-          Infusion bei dir zuhause · Zürcher Unterland
-        </span>
-        <h1>Vital+</h1>
-        <p class="hero__sub">Dein individueller Nährstoff-Boost: Gemeinsam mit unserem Arzt stellen wir die Kombination aus Vitaminen und Mineralstoffen zusammen, die dein Körper jetzt braucht — für Energie, Regeneration und ein starkes Immunsystem.</p>
-        <ul class="p-bullets">
-          <li><span class="p-tick" aria-hidden="true">✓</span>Individuell zusammengestellter Mix</li>
-          <li><span class="p-tick" aria-hidden="true">✓</span>Auswahl gemeinsam mit unserem Arzt</li>
-          <li><span class="p-tick" aria-hidden="true">✓</span>Für Energie, Stoffwechsel und Immunabwehr</li>
-          <li><span class="p-tick" aria-hidden="true">✓</span>Unser Preis-Einstieg in die Nährstoff-Infusionen</li>
-        </ul>
-        <div class="hero__cta">
-          <a href="#anfrage" class="btn btn--primary" data-scroll>Vital+ anfragen</a>
-          <a href="tel:+41445250220" class="link-scroll">☎ 044 525 02 20</a>
+            <div class="price-box">
+                <div class="price">ab CHF 280.–</div>
+                <div class="price-desc">Endpreis inkl. Anfahrt, Material & Betreuung</div>
+            </div>
+
+            <div class="features">
+                <div class="feature">Für maximale Energie</div>
+                <div class="feature">Immunsystem stärken</div>
+                <div class="feature">Ärztlich begleitet</div>
+                <div class="feature">Bei dir zuhause</div>
+            </div>
+
+            <div class="cta-group">
+                <button class="btn-primary">Kostenlose Erstberatung</button>
+            </div>
         </div>
-        <p class="hero__trust">Diplomierte Pflegefachfrauen <span class="dot">·</span> Ärztlich begleitet <span class="dot">·</span> Nur nach ärztlicher Abklärung</p>
-      </div>
-      <figure class="hero__media media p-media reveal">
-        <img src="assets/img/p-vital.png" width="800" height="800" alt="Vital+ — Infusion von Pflegepartner AG" class="img-fade" fetchpriority="high" decoding="async">
-      </figure>
-    </div>
-  </section>
 
-  <!-- Inhaltsstoffe -->
-  <section class="section vit-section-3d" style="position: relative; overflow: hidden;">
-    <!-- 3D Body Video Background — scrubs with scroll like a video -->
-    <video class="vit-body-bg" src="assets/body-video.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
-    <div class="vit-body-veil" aria-hidden="true"></div>
-
-    <div class="wrap" style="position: relative; z-index: 2;">
-      <div class="section__head vit-head-3d">
-        <span class="eyebrow">Was steckt drin</span>
-        <h2>Inhaltsstoffe</h2>
-        <p>Die genaue Zusammensetzung und Dosierung stimmen wir vor der ersten Infusion gemeinsam mit unserem Arzt auf dich ab.</p>
-      </div>
-      <div class="chip-row reveal">
-        <span class="chip">Vitamin C</span>
-        <span class="chip">Vitamin B12</span>
-        <span class="chip">Magnesium</span>
-        <span class="chip">Vitamin-B-Komplex (B1, B2, B3, B5)</span>
-        <span class="chip">Zink</span>
-        <span class="chip">Selen</span>
-      </div>
-      <div class="p-wer reveal">
-        <h3>Für wen eignet sich Vital+?</h3>
-        <p>Vital+ passt zu dir, wenn du dich oft müde fühlst, viel leistest oder deinem Körper eine gezielte Grundversorgung mit Mikronährstoffen gönnen willst — massgeschneidert statt Standard-Cocktail.</p>
-      </div>
-      <p class="reveal" style="text-align: center; margin: 2rem 0 1rem; font-size: 0.95rem; color: var(--pp-ink-soft);"><strong style="color: var(--pp-red); font-size: 1.25rem;">CHF 249.–</strong> Endpreis inkl. Anfahrt, Material &amp; Betreuung</p>
-      <p class="menu-note">Nahrungsergänzung ersetzt keine ausgewogene Ernährung und keine ärztliche Behandlung. Kein Heilversprechen — die Eignung klären wir vorab persönlich.</p>
-    </div>
-  </section>
-
-  <style>
-    .vit-section-3d {
-      min-height: 110vh;
-      display: flex;
-      align-items: center;
-    }
-
-    .vit-section-3d .wrap {
-      perspective: 1000px;
-    }
-
-    .vit-head-3d {
-      transform-origin: 50% 100%;
-      transform-style: preserve-3d;
-      will-change: transform, opacity;
-      opacity: 0;
-    }
-
-    .vit-body-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      pointer-events: none;
-      transform: scale(1.08);
-      will-change: transform;
-    }
-
-    /* Veil: keeps text readable at top/bottom, video clearly visible in the middle */
-    .vit-body-veil {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: linear-gradient(180deg,
-        rgba(253, 249, 247, 0.96) 0%,
-        rgba(253, 249, 247, 0.55) 24%,
-        rgba(253, 249, 247, 0.18) 55%,
-        rgba(253, 249, 247, 0.92) 100%);
-    }
-
-    .vit-section-3d .section__head h2,
-    .vit-section-3d .section__head p {
-      text-shadow: 0 1px 12px rgba(253, 249, 247, 0.9);
-    }
-
-    @media (max-width: 900px) {
-      .vit-section-3d {
-        min-height: 90vh;
-      }
-    }
-  </style>
-
-  <script>
-    // Scroll-scrubbed 3D body video: scrolling drives the video like a timeline
-    (function () {
-      var video = document.querySelector('.vit-body-bg');
-      var section = document.querySelector('.vit-section-3d');
-      if (!video || !section) return;
-
-      var targetProgress = 0;
-      var currentTime = 0;
-      var duration = 0;
-
-      video.addEventListener('loadedmetadata', function () {
-        duration = video.duration || 0;
-      });
-      video.load();
-
-      var head = document.querySelector('.vit-head-3d');
-
-      function onScroll() {
-        var rect = section.getBoundingClientRect();
-        var total = rect.height + window.innerHeight;
-        var progress = (window.innerHeight - rect.top) / total;
-        targetProgress = Math.max(0, Math.min(1, progress));
-
-        // Subtle parallax zoom while scrolling
-        video.style.transform = 'scale(' + (1.08 + targetProgress * 0.12) + ')';
-
-        // Heading tilts in from 3D depth, scrubbed by scroll
-        if (head) {
-          var hr = head.getBoundingClientRect();
-          var start = window.innerHeight;
-          var end = window.innerHeight * 0.4;
-          var hp = (start - hr.top) / (start - end);
-          hp = Math.max(0, Math.min(1, hp));
-          var ease = hp * hp * (3 - 2 * hp);
-          head.style.opacity = ease;
-          head.style.transform =
-            'translateY(' + ((1 - ease) * 90) + 'px)' +
-            ' translateZ(' + ((1 - ease) * -220) + 'px)' +
-            ' rotateX(' + ((1 - ease) * 55) + 'deg)';
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      document.addEventListener('scroll', onScroll, { passive: true, capture: true });
-      onScroll();
-
-      // Smooth the scrub so it feels like the video is playing.
-      // onScroll() runs every frame too — robust even if scroll events
-      // fire on an inner scroller instead of window.
-      (function tick() {
-        onScroll();
-        if (duration) {
-          var target = targetProgress * (duration - 0.05);
-          currentTime += (target - currentTime) * 0.12;
-          if (Math.abs(video.currentTime - currentTime) > 0.02) {
-            try { video.currentTime = currentTime; } catch (e) {}
-          }
-        }
-        requestAnimationFrame(tick);
-      })();
-    })();
-  </script>
-
-  <!-- Ablauf kompakt -->
-  <section class="section">
-    <div class="wrap">
-      <div class="section__head reveal">
-        <span class="eyebrow">So einfach läuft es ab</span>
-        <h2>In drei Schritten zu deiner Infusion</h2>
-      </div>
-      <div class="steps">
-        <article class="step reveal">
-          <div class="step__num">1</div>
-          <h3>Anfrage stellen</h3>
-          <p>Formular unten ausfüllen — dauert keine Minute. Wir melden uns meist noch am selben Tag.</p>
-        </article>
-        <article class="step reveal">
-          <div class="step__num">2</div>
-          <h3>Kurze ärztliche Beratung</h3>
-          <p>Wir klären mit dir ab, ob Vital+ zu deinem Ziel passt — sicher und individuell.</p>
-        </article>
-        <article class="step reveal">
-          <div class="step__num">3</div>
-          <h3>Wir kommen zu dir</h3>
-          <p>Zum Wunschtermin bei dir zuhause oder im Büro. Wir bringen alles mit und bleiben bei dir.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Vertrauen -->
-  <section class="section section--tint">
-    <div class="wrap">
-      <div class="section__head reveal">
-        <span class="eyebrow">Der Unterschied</span>
-        <h2>Spitex-Fachwissen statt Lifestyle-Studio</h2>
-        <p>Eine Infusion gehört in medizinische Hände. Bei uns wird sie von diplomierten Pflegefachfrauen mit Spital-Erfahrung gelegt — ärztlich begleitet durch Dr. Frédéric Porchet.</p>
-      </div>
-      <div class="cards cards--3">
-        <article class="card-benefit reveal">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l7 3v6c0 4.5-3 8.3-7 9.5C8 19.3 5 15.5 5 11V5l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3>Ärztlich begleitet</h3>
-          <p>Auswahl und Dosierung nach ärztlicher Abklärung — höchste Qualitäts- und Sicherheitsstandards.</p>
-        </article>
-        <article class="card-benefit reveal">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c0-3.3 3.6-5 8-5s8 1.7 8 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-          <h3>Pflegefachfrauen mit Spital-Erfahrung</h3>
-          <p>Infusionen sind unser Alltag als spezialisierte Spitex — keine angelernte Aushilfe.</p>
-        </article>
-        <article class="card-benefit reveal">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20v-8l8-6 8 6v8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 20v-5h6v5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <h3>Bei dir zuhause</h3>
-          <p>Keine Anfahrt, kein Wartezimmer — wir bringen alles mit und bleiben während der Behandlung bei dir.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ kompakt -->
-  <section class="section" id="faq">
-    <div class="wrap">
-      <div class="section__head reveal">
-        <span class="eyebrow">Gut zu wissen</span>
-        <h2>Häufige Fragen</h2>
-      </div>
-      <div class="faq reveal">
-        <details>
-          <summary>Ist eine Infusion zuhause sicher? <span class="plus" aria-hidden="true"></span></summary>
-          <p>Ja. Verabreicht wird ausschliesslich von diplomierten Pflegefachfrauen, ärztlich begleitet. Wir bringen alles mit und bleiben während der ganzen Behandlung bei dir.</p>
-        </details>
-        <details>
-          <summary>Übernimmt die Krankenkasse die Kosten? <span class="plus" aria-hidden="true"></span></summary>
-          <p>Wellness- und Vitamin-Infusionen sind in der Regel Selbstzahler-Leistungen. Der angegebene Preis ist der Endpreis — inklusive Anfahrt, Material und Betreuung.</p>
-        </details>
-        <details>
-          <summary>In welchem Gebiet kommt ihr vorbei? <span class="plus" aria-hidden="true"></span></summary>
-          <p>Im ganzen Zürcher Unterland und in Winterthur — bei Bedarf im ganzen Kanton Zürich.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Andere Infusionen -->
-  <section class="section section--tint">
-    <div class="wrap">
-      <div class="section__head reveal">
-        <span class="eyebrow">Noch nicht sicher?</span>
-        <h2>Andere Infusionen entdecken</h2>
-      </div>
-      <div class="chip-row chip-row--center reveal">
-        <a class="chip chip--link" href="infusion-vitaminpraeparat.html">Vitaminpräparat</a>
-        <a class="chip chip--link" href="infusion-glutathion.html">Glutathion</a>
-        <a class="chip chip--link" href="infusion-recovery.html">Recovery / Hangover-Boost</a>
-        <a class="chip chip--link" href="infusion-immune-boost.html">Immune Boost</a>
-        <a class="chip chip--link" href="infusion-nad.html">NAD+</a>
-        <a class="chip chip--link" href="infusion-beauty-cocktail.html">Beauty-Cocktail (NAD+)</a>
-        <a class="chip chip--link" href="index.html#infusionen">Alle Infusionen &amp; Preise →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Anfrage -->
-  <section class="section final" id="anfrage">
-    <div class="wrap final__grid">
-      <div class="reveal">
-        <span class="eyebrow" style="color:#fff;opacity:.9">Kostenlose Erstberatung</span>
-        <h2>Vital+ — mir chömed zu dir.</h2>
-        <p class="final__intro">Ein paar kurze Angaben, dann meldet sich unser Team für deine kostenlose Erstberatung — meist noch am selben Tag.</p>
-        <div class="final__call">
-          <small>Lieber direkt anrufen?</small>
-          <a href="tel:+41445250220" data-phone>044 525 02 20</a>
+        <div class="hero-right">
+            <div style="font-size: 3rem; opacity: 0.3;">⚡</div>
         </div>
-      </div>
-      <div class="form-card reveal">
-        <form id="lead-form" novalidate>
-          <p class="form-lead">Damit dich unser Arzt vorab richtig einschätzen kann — vier kurze Angaben:</p>
-          <div class="form-row">
-            <label for="ziel">Dein Ziel / Anliegen</label>
-            <select class="form-control" id="ziel" name="ziel" required>
-              <option value="">Bitte wählen …</option>
-              <option>Mehr Energie &amp; Regeneration</option>
-              <option>Immunsystem stärken</option>
-              <option>Anti-Aging &amp; Longevity</option>
-              <option>Erholung nach Sport oder Krankheit</option>
-              <option>Schönheit — Haut &amp; Haare</option>
-              <option>Noch unsicher — bitte beraten</option>
-            </select>
-          </div>
-          <div class="form-row--split">
-            <div>
-              <label for="zeitraum">Wunschzeitraum</label>
-              <select class="form-control" id="zeitraum" name="zeitraum" required>
-                <option value="">Bitte wählen …</option>
-                <option>So bald wie möglich</option>
-                <option>Diese Woche</option>
-                <option>Diesen Monat</option>
-                <option>Nur informieren</option>
-              </select>
-            </div>
-            <div>
-              <label for="plz">PLZ / Wohnort</label>
-              <input class="form-control" type="text" id="plz" name="plz" inputmode="numeric" autocomplete="postal-code" placeholder="z.B. 8184" required>
-            </div>
-          </div>
-          <p class="plz-hint" id="plz-hint" hidden>Wir sind vor allem im Zürcher Unterland &amp; Kanton Zürich unterwegs — frag trotzdem an, wir prüfen, ob wir zu dir kommen.</p>
-          <div class="form-row">
-            <label for="infusion">Deine Infusion</label>
-            <select class="form-control" id="infusion" name="infusion">
-              <option value="">Noch unentschlossen / Beratung gewünscht</option>
-              <option>Vitaminpräparat</option>
-              <option selected>Vital+</option>
-              <option>Glutathion</option>
-              <option>Recovery / Hangover-Boost</option>
-              <option>Immune Boost</option>
-              <option>NAD+</option>
-              <option>Beauty-Cocktail (NAD+)</option>
-            </select>
-          </div>
-          <hr class="form-sep">
-          <div class="form-row">
-            <label for="name">Name</label>
-            <input class="form-control" type="text" id="name" name="name" autocomplete="name" required>
-          </div>
-          <div class="form-row--split">
-            <div>
-              <label for="phone">Telefon</label>
-              <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" required>
-            </div>
-            <div>
-              <label for="email">E-Mail <span class="opt">(optional)</span></label>
-              <input class="form-control" type="email" id="email" name="email" autocomplete="email" inputmode="email">
-            </div>
-          </div>
-          <div class="form-row">
-            <label for="message">Nachricht <span class="opt">(optional)</span></label>
-            <textarea class="form-control" id="message" name="message" rows="2"></textarea>
-          </div>
-          <label class="form-consent">
-            <input type="checkbox" id="consent" name="consent" required>
-            <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden. Bitte keine sensiblen Gesundheitsdaten ins Formular — Details klären wir persönlich.</span>
-          </label>
-          <button type="submit" class="btn btn--primary btn--block">Vital+ anfragen</button>
-          <p class="form-privacy">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l7 3v6c0 4.5-3 8.3-7 9.5C8 19.3 5 15.5 5 11V5l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            Deine Daten behandeln wir vertraulich und geben sie nicht weiter.
-          </p>
-        </form>
-      </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<footer class="site-footer">
-  <div class="wrap footer__grid footer">
-    <div>
-      <div class="footer__brand">
-        <img class="brand__logo" src="assets/img/logo-icon.png" alt="" aria-hidden="true">
-        <strong>Pflegepartner AG</strong>
-      </div>
-      <p>Spezialisierte Spitex für Infusionen und Pflege zuhause im Zürcher Unterland. Diplomierte Pflegefachfrauen, ärztlich begleitet.</p>
-    </div>
-    <div>
-      <h4>Kontakt</h4>
-      <p>
-        Bramenstrasse 5<br>
-        8184 Bachenbülach<br>
-        <a href="tel:+41445250220">044 525 02 20</a><br>
-        <a href="mailto:pflegepartner@hin.ch">pflegepartner@hin.ch</a><br>
-        <a href="https://pflegepartner.ch" target="_blank" rel="noopener">pflegepartner.ch</a>
-      </p>
-    </div>
-    <div>
-      <h4>Öffnungszeiten &amp; mehr</h4>
-      <p>
-        Mo–Fr während Bürozeiten<br>
-        <a href="https://instagram.com/pflegepartner.ch" target="_blank" rel="noopener">Instagram</a> ·
-        <a href="https://ch.linkedin.com/company/pflegepartner" target="_blank" rel="noopener">LinkedIn</a><br>
-        <a href="https://pflegepartner.ch/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung</a>
-      </p>
-    </div>
-  </div>
-  <div class="wrap footer__bottom">
-    <span>© <span id="year">2026</span> Pflegepartner AG · Alle Rechte vorbehalten</span>
-    <span>Kein Heilversprechen. Infusionen nur nach ärztlicher Abklärung.</span>
-  </div>
-</footer>
+    <section class="form-section" id="anfrage">
+        <div class="form-container">
+            <h2>Kostenlose Erstberatung</h2>
+            <p>Ein paar kurze Angaben — dann melden wir uns noch heute</p>
 
-<div class="sticky-cta">
-  <a href="#anfrage" class="btn btn--primary" data-scroll>Vital+ anfragen</a>
-</div>
+            <form id="lead-form">
+                <div class="form-section-title">Persönliche Angaben</div>
 
-<script src="js/main.js"></script>
-<script>
-gsap.registerPlugin(ScrollTrigger);
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
 
-// Animate all .reveal elements on scroll
-gsap.utils.toArray(".reveal").forEach((el) => {
-  gsap.to(el, {
-    scrollTrigger: {
-      trigger: el,
-      start: "top 80%",
-      end: "top 60%",
-      scrub: false,
-      toggleActions: "play none none none"
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  });
-});
+                <div class="form-group">
+                    <label for="phone">Telefon *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
 
-// Animate all .card-benefit on scroll
-gsap.utils.toArray(".card-benefit").forEach((card, index) => {
-  gsap.to(card, {
-    scrollTrigger: {
-      trigger: card,
-      start: "top 85%",
-      end: "top 65%",
-      scrub: 1,
-      toggleActions: "play none none none"
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    delay: index * 0.08
-  });
-});
+                <div class="form-group">
+                    <label for="email">E-Mail (optional)</label>
+                    <input type="email" id="email" name="email">
+                </div>
 
-// Animate section headers
-gsap.utils.toArray(".section__head h2").forEach((heading) => {
-  gsap.to(heading, {
-    scrollTrigger: {
-      trigger: heading,
-      start: "top 80%",
-      end: "top 60%",
-      scrub: false,
-      toggleActions: "play none none none"
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  });
-});
+                <div class="form-group">
+                    <label for="plz">PLZ / Wohnort *</label>
+                    <input type="text" id="plz" name="plz" placeholder="z.B. 8184" required>
+                </div>
 
-// Parallax effect on hero section
-gsap.to(".p-hero", {
-  scrollTrigger: {
-    trigger: ".p-hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: 1,
-    markers: false
-  },
-  y: 100,
-  opacity: 0.95,
-  ease: "none"
-});
-</script>
+                <div class="form-section-title">Deine Infusion</div>
+
+                <div class="form-group">
+                    <label for="infusion">Welche Infusion interessiert dich? *</label>
+                    <select id="infusion" name="infusion" required>
+                        <option value="">Bitte wählen…</option>
+                        <option value="Vitaminpräparat">Vitaminpräparat</option>
+                        <option value="Vital+">Vital+</option>
+                        <option value="Glutathion">Glutathion</option>
+                        <option value="Recovery">Recovery / Hangover-Boost</option>
+                        <option value="Immune Boost">Immune Boost</option>
+                        <option value="NAD+">NAD+</option>
+                        <option value="Beauty-Cocktail">Beauty-Cocktail (NAD+)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ziel">Dein Ziel / Anliegen *</label>
+                    <select id="ziel" name="ziel" required>
+                        <option value="">Bitte wählen…</option>
+                        <option value="Mehr Energie">Mehr Energie & Regeneration</option>
+                        <option value="Immunsystem">Immunsystem stärken</option>
+                        <option value="Anti-Aging">Anti-Aging & Longevity</option>
+                        <option value="Erholung">Erholung nach Sport</option>
+                        <option value="Noch unsicher">Noch unsicher</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="zeitraum">Wunschzeitraum *</label>
+                    <select id="zeitraum" name="zeitraum" required>
+                        <option value="">Bitte wählen…</option>
+                        <option value="So bald wie möglich">So bald wie möglich</option>
+                        <option value="Diese Woche">Diese Woche</option>
+                        <option value="Diesen Monat">Diesen Monat</option>
+                        <option value="Nur informieren">Nur informieren</option>
+                    </select>
+                </div>
+
+                <div class="form-section-title">⭐ Medizinische Voraussetzungen</div>
+
+                <div class="form-group">
+                    <label>Befinden Sie sich aktuell in ärztlicher Behandlung? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="arzt-nein" name="arzt_behandlung" value="Nein" required>
+                            <label for="arzt-nein">Nein</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="arzt-ja" name="arzt_behandlung" value="Ja">
+                            <label for="arzt-ja">Ja</label>
+                        </div>
+                    </div>
+                    <input type="text" id="arzt-details" class="text-input-inline" name="arzt_details" placeholder="Kurz erläutern (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label>Bestehen relevante Vorerkrankungen? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="vorerkr-nein" name="vorerkrankungen" value="Nein" required>
+                            <label for="vorerkr-nein">Nein</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="vorerkr-ja" name="vorerkrankungen" value="Ja">
+                            <label for="vorerkr-ja">Ja</label>
+                        </div>
+                    </div>
+                    <input type="text" id="vorerkr-details" class="text-input-inline" name="vorerkrankungen_details" placeholder="Nämlich… (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label>Nehmen Sie regelmässig Medikamente ein? *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="med-nein" name="medikamente" value="Nein" required>
+                            <label for="med-nein">Nein</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="med-ja" name="medikamente" value="Ja">
+                            <label for="med-ja">Ja</label>
+                        </div>
+                    </div>
+                    <input type="text" id="med-details" class="text-input-inline" name="medikamente_details" placeholder="Nämlich… (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Weitere Anmerkungen (optional)</label>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">Ich bin einverstanden, dass meine Angaben zur Bearbeitung verwendet werden.</label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Kostenlose Erstberatung anfragen</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>☎ 044 525 02 20 | diplomierte Pflegefachfrauen · ärztlich begleitet · nur nach ärztlicher abklärung</p>
+    </footer>
+
+    <script>
+        document.getElementById('lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Vielen Dank! Wir melden uns bald bei dir.\n\n044 525 02 20');
+        });
+    </script>
 </body>
 </html>
