@@ -107,6 +107,7 @@
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Wird gesendet …"; }
 
       function val(sel) { var el = $(sel); return el ? el.value.trim() : ""; }
+      function radioVal(name) { var r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ""; }
       var data = {
         ziel:     val("#ziel"),
         zeitraum: val("#zeitraum"),
@@ -117,6 +118,9 @@
         email:    val("#email"),
         message:  val("#message"),
         consent:  ($("#consent") && $("#consent").checked) ? "ja" : "",
+        arzt_behandlung: radioVal("arzt_behandlung"),
+        vorerkrankungen: radioVal("vorerkrankungen"),
+        medikamente: radioVal("medikamente"),
         source:   location.href,
         _subject: "Neue Infusions-Anfrage (Landingpage)"
       };
