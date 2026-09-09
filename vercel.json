@@ -2,48 +2,115 @@
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "leads.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "leads.pflegepartner.ch"
+        }
+      ],
       "destination": "https://pflegepartner-leads-production.up.railway.app/"
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "leads.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "leads.pflegepartner.ch"
+        }
+      ],
       "destination": "https://pflegepartner-leads-production.up.railway.app/:path*"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "vital.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "vital.pflegepartner.ch"
+        }
+      ],
       "destination": "/vital.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "glutathion.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "glutathion.pflegepartner.ch"
+        }
+      ],
       "destination": "/glutathion.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "recovery.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "recovery.pflegepartner.ch"
+        }
+      ],
       "destination": "/recovery.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "immune.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "immune.pflegepartner.ch"
+        }
+      ],
       "destination": "/immune.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "nad.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "nad.pflegepartner.ch"
+        }
+      ],
       "destination": "/nad.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "beauty.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "beauty.pflegepartner.ch"
+        }
+      ],
       "destination": "/beauty.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "vitamine.pflegepartner.ch" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "vitamine.pflegepartner.ch"
+        }
+      ],
       "destination": "/vitamine.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "quiz.pflegepartner.ch"
+        }
+      ],
+      "destination": "/quiz.html"
+    },
+    {
+      "source": "/quiz",
+      "destination": "/quiz.html"
+    },
+    {
+      "source": "/check",
+      "destination": "/quiz.html"
+    },
+    {
+      "source": "/infusions-check",
+      "destination": "/quiz.html"
     },
     {
       "source": "/",

@@ -20,7 +20,10 @@
      ================================================================ -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: "lead_thankyou" });
+  (function(){
+    var q = new URLSearchParams(location.search);
+    window.dataLayer.push({ event: "lead_thankyou", quelle: q.get("quelle") || "landingpage", empfehlung: q.get("empfehlung") || "" });
+  })();
   window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
   // fbq('track', 'Lead');                    // aktivieren, sobald Pixel geladen ist
   // gtag('event','conversion',{send_to:'AW-XXXXXXXXXX/xxxxxxxxxxxxxxx'});
@@ -46,6 +49,10 @@
       </div>
       <h1>Danke — deine Anfrage ist da.</h1>
       <p>Wir haben deine Anfrage erhalten und melden uns so schnell wie möglich für deine kostenlose Erstberatung. Meist noch am selben Tag.</p>
+      <div id="empfehlung" hidden style="margin:0 auto 1.4rem;max-width:34rem;background:#F9E6EA;border:1px solid #F0E2DD;border-radius:16px;padding:1rem 1.2rem;font-size:.98rem;color:#2A2A2A">
+        Deine Empfehlung aus dem Infusions-Check: <strong id="empfehlung-name"></strong>.<br>
+        Alle Details haben wir dir per E-Mail geschickt — <a id="empfehlung-link" href="https://pflegepartner.ch/store" target="_blank" rel="noopener">mehr zur Infusion</a>.
+      </div>
       <p style="font-size:.98rem">Dringend? Ruf uns direkt an: <a href="tel:+41445250220">044 525 02 20</a></p>
       <a href="https://pflegepartner.ch" class="btn btn--ghost" style="margin-top:.6rem">Zur Pflegepartner-Website</a>
     </div>
@@ -61,6 +68,23 @@
 
 <script>
   (function(){ var y=document.getElementById('year'); var n=new Date().getFullYear(); if(y&&n&&!isNaN(n)) y.textContent=n; })();
+  /* Infusions-Check: Empfehlung auf der Dankeseite anzeigen (?quelle=quiz&empfehlung=<slug>) */
+  (function(){
+    var P = {
+      vitamine:   ["Vitaminpräparat", "https://vitamine.pflegepartner.ch"],
+      vital:      ["Vital+", "https://vital.pflegepartner.ch"],
+      glutathion: ["Glutathion", "https://glutathion.pflegepartner.ch"],
+      recovery:   ["Recovery / Hangover-Boost", "https://recovery.pflegepartner.ch"],
+      immune:     ["Immune Boost", "https://immune.pflegepartner.ch"],
+      nad:        ["NAD+", "https://nad.pflegepartner.ch"],
+      beauty:     ["Beauty-Cocktail (NAD+)", "https://beauty.pflegepartner.ch"]
+    };
+    var q = new URLSearchParams(location.search), slug = q.get("empfehlung");
+    if (!slug || !P[slug]) return;
+    document.getElementById("empfehlung-name").textContent = P[slug][0];
+    document.getElementById("empfehlung-link").href = P[slug][1];
+    document.getElementById("empfehlung").hidden = false;
+  })();
 </script>
 </body>
 </html>
