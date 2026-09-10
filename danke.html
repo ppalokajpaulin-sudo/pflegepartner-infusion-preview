@@ -24,10 +24,17 @@
     var q = new URLSearchParams(location.search);
     window.dataLayer.push({ event: "lead_thankyou", quelle: q.get("quelle") || "landingpage", empfehlung: q.get("empfehlung") || "" });
   })();
-  window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
-  // fbq('track', 'Lead');                    // aktivieren, sobald Pixel geladen ist
-  // gtag('event','conversion',{send_to:'AW-XXXXXXXXXX/xxxxxxxxxxxxxxx'});
+  /* Meta Pixel (pflege pixel) — Lead-Conversion; eventID = Lead-ID fuer Dedup mit dem Server-Event */
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '977086168436098');
+  fbq('track', 'PageView');
+  (function(){
+    var q = new URLSearchParams(location.search), leadId = q.get("lead"), opts = leadId ? { eventID: "lead-" + leadId } : undefined;
+    fbq('track', 'Lead', { content_name: q.get("empfehlung") || "", content_category: "Infusion", source: q.get("quelle") || "landingpage" }, opts);
+  })();
+  // gtag('event','conversion',{send_to:'AW-XXXXXXXXXX/xxxxxxxxxxxxxxx'});   // Google Ads: ID folgt
 </script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=977086168436098&ev=PageView&noscript=1"></noscript>
 </head>
 
 <body>

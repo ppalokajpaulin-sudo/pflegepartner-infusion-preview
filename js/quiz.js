@@ -20,6 +20,8 @@
   function track(ev, data) {
     try { window.dataLayer = window.dataLayer || []; window.dataLayer.push(Object.assign({ event: ev }, data || {})); } catch (e) {}
   }
+  function fbTrack(ev, data) { try { if (window.fbq) window.fbq("trackCustom", ev, data || {}); } catch (e) {} }
+  function cookie(name) { var m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : ""; }
 
   /* --- Produkte (Namen = identisch mit den Landingpage-Formularen) --- */
   var PRODUCTS = {
@@ -198,6 +200,7 @@
       '</div>';
     $("#q-start").addEventListener("click", function () {
       track("quiz_start", { resume: resume });
+      fbTrack("QuizStart");
       state.step = resume && typeof state.step === "number" && state.step >= 0 ? state.step : 0;
       if (state.step < 0) state.step = 0;
       render(); scrollToCard();
@@ -354,6 +357,7 @@
     var p = PRODUCTS[rec.top], alt = PRODUCTS[rec.alt];
     var befinden = (a.befinden || []).map(function (v) { return labelOf("befinden", v); });
     track("quiz_result", { infusion: p.name, alternative: alt.name, ziel: labelOf("ziel", a.ziel), zeitraum: a.zeitraum || "" });
+    fbTrack("QuizResult", { content_name: p.name, content_category: "Infusion" });
 
     var why = [
       "<b>Dein Ziel: " + esc(labelOf("ziel", a.ziel)) + ".</b> " + esc(p.fit),
@@ -424,16 +428,20 @@
           empfehlung: rec.top, alternative: rec.alt, scores: rec.scores
         },
         website: form.website ? form.website.value : "",
+        fbp: cookie("_fbp"),
+        fbc: cookie("_fbc") || (function () { var id = new URLSearchParams(location.search).get("fbclid"); return id ? "fb.1." + Date.now() + "." + id : ""; })(),
         source: location.href,
         _subject: "Neue Infusions-Anfrage (Infusions-Check)"
       };
       track("lead_submit", { infusion: p.name, ziel: data.ziel, zeitraum: data.zeitraum, funnel: "quiz" });
-      function done() {
+      function done(leadId) {
         try { sessionStorage.removeItem(STORE_KEY); } catch (e) {}
-        window.location.href = THANKS_URL + "?quelle=quiz&empfehlung=" + encodeURIComponent(rec.top);
+        window.location.href = THANKS_URL + "?quelle=quiz&empfehlung=" + encodeURIComponent(rec.top) + (leadId ? "&lead=" + encodeURIComponent(leadId) : "");
       }
       fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify(data) })
-        .then(done).catch(done);
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (res) { done(res && res.id); })
+        .catch(function () { done(); });
     });
   }
 

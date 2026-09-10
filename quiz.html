@@ -16,13 +16,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/quiz.css?v=20260909">
-<!-- Tracking-Stubs: echte IDs (GTM / Meta-Pixel / Google Ads) kommen zentral vor Livegang -->
+<!-- Tracking: Meta Pixel aktiv. GTM / Google Ads: IDs folgen. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
-  window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
+  /* Meta Pixel (pflege pixel) */
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '977086168436098');
+  fbq('track', 'PageView');
+  fbq('trackCustom', 'QuizView');
   window.dataLayer.push({ event: "quiz_view", funnel: "infusions-check" });
 </script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=977086168436098&ev=PageView&noscript=1"></noscript>
 </head>
 
 <body>
@@ -182,6 +187,6 @@
   </div>
 </footer>
 
-<script src="js/quiz.js?v=20260909" defer></script>
+<script src="js/quiz.js?v=20260910" defer></script>
 </body>
 </html>
