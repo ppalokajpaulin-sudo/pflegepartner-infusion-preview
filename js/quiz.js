@@ -178,13 +178,16 @@
   var SHIELD = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l7 3v6c0 4.5-3 8.3-7 9.5C8 19.3 5 15.5 5 11V5l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   var BACK = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+  /* Schritt-Nummerierung: -1 Intro, 0 E-Mail-Gate (vor dem Quiz), 1..TOTAL Fragen
+     (STEPS[step-1]), TOTAL+1 Auswertung, TOTAL+2 Ergebnis. */
   function setProgress() {
     var idx = state.step;
     if (idx < 0) { progressWrap.hidden = true; return; }
     progressWrap.hidden = false;
-    var pct = idx >= TOTAL ? 100 : Math.round(((idx) / (TOTAL + 1)) * 100) + 6;
+    if (idx === 0) { bar.style.width = "4%"; barTxt.textContent = "Kurz registrieren"; return; }
+    var pct = idx > TOTAL ? 100 : Math.round(((idx - 1) / (TOTAL + 1)) * 100) + 10;
     bar.style.width = pct + "%";
-    barTxt.textContent = idx === TOTAL + 1 ? "Fast geschafft" : idx > TOTAL ? "Deine Empfehlung" : idx === TOTAL ? "Deine Empfehlung" : ("Frage " + (idx + 1) + " von " + TOTAL);
+    barTxt.textContent = idx > TOTAL ? "Deine Empfehlung" : ("Frage " + idx + " von " + TOTAL);
   }
 
   function scrollToCard() {
@@ -197,9 +200,9 @@
     setProgress();
     persist();
     if (state.step < 0) return renderIntro();
-    if (state.step < TOTAL) return renderStep(STEPS[state.step]);
-    if (state.step === TOTAL) return renderCalc();
-    if (state.step === TOTAL + 1) return renderEmailGate();
+    if (state.step === 0) return renderEmailGate();
+    if (state.step <= TOTAL) return renderStep(STEPS[state.step - 1]);
+    if (state.step === TOTAL + 1) return renderCalc();
     return renderResult();
   }
 
@@ -361,7 +364,7 @@
     setTimeout(function () { var e = $("#qc1"); if (e) e.classList.add("on"); }, 350 * d);
     setTimeout(function () { var e = $("#qc2"); if (e) e.classList.add("on"); }, 850 * d);
     setTimeout(function () { var e = $("#qc3"); if (e) e.classList.add("on"); }, 1300 * d);
-    setTimeout(function () { state.step = TOTAL + 1; render(); scrollToCard(); }, 1750 * d);
+    setTimeout(function () { state.step = TOTAL + 2; render(); scrollToCard(); }, 1750 * d);
   }
 
   function labelOf(stepId, v) {
@@ -393,28 +396,28 @@
     };
   }
 
-  /* --- E-Mail-Gate: Name + E-Mail schalten die Empfehlung frei -----
-     Erfasst den Lead schon hier (ohne Telefon) — geht er danach nicht mehr
-     weiter, ist trotzdem nicht alles verloren. Das Ergebnis-Formular
-     ergaenzt denselben Datensatz spaeter um Telefon/Consent. */
+  /* --- E-Mail-Gate: Name + E-Mail, bevor der Quiz ueberhaupt startet -----
+     Erfasst den Lead schon vor Frage 1 (noch ohne Telefon, noch ohne
+     Empfehlung — die gibt es erst nach den 7 Fragen). So geht kein Kontakt
+     verloren, selbst wenn jemand den Quiz danach abbricht. Am Ende ergaenzt
+     das Ergebnis-Formular denselben Datensatz um Telefon/Consent/Empfehlung. */
   function renderEmailGate() {
-    var rec = recommend(state.answers);
     body.innerHTML =
       '<div class="q-panel q-gate">' +
-        '<div class="q-intro__icon">' + CHECK + '</div>' +
-        '<h2>Deine Empfehlung ist bereit.</h2>' +
-        '<p class="q-hint">Trag deinen Namen und deine E-Mail ein — wir schicken dir deine persönliche Empfehlung sofort dorthin und zeigen sie dir gleich hier.</p>' +
+        '<div class="q-intro__icon"><svg class="house" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 14 L50 30 V50 H14 V30 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/><path d="M32 32 v12 M26 38 h12" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div>' +
+        '<h2>Bevor es losgeht.</h2>' +
+        '<p class="q-hint">Trag kurz deinen Namen und deine E-Mail ein — dann geht es direkt weiter mit den 7 Fragen, und wir schicken dir deine persönliche Empfehlung am Ende dorthin.</p>' +
         '<form id="q-gate-form" novalidate>' +
           '<div class="form-row"><label for="q-gate-name">Vorname &amp; Name</label><input class="form-control" type="text" id="q-gate-name" name="name" autocomplete="name" value="' + esc(state.gateName) + '" required></div>' +
           '<div class="form-row"><label for="q-gate-email">E-Mail</label><input class="form-control" type="email" id="q-gate-email" name="email" autocomplete="email" inputmode="email" value="' + esc(state.gateEmail) + '" required></div>' +
           '<div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
           '<div class="q-error" id="q-gate-err" hidden></div>' +
-          '<button type="submit" class="btn btn--primary btn--block" id="q-gate-submit">Empfehlung anzeigen</button>' +
+          '<button type="submit" class="btn btn--primary btn--block" id="q-gate-submit">Weiter zum Check</button>' +
           '<p class="form-privacy">' + SHIELD + ' Nur für deine Empfehlung — kein Spam, keine Weitergabe.</p>' +
         '</form>' +
         '<button type="button" class="q-back" id="q-gate-back">' + BACK + ' Zurück</button>' +
       '</div>';
-    $("#q-gate-back").addEventListener("click", function () { state.step = TOTAL - 1; render(); scrollToCard(); });
+    $("#q-gate-back").addEventListener("click", function () { state.step = -1; render(); scrollToCard(); });
 
     var form = $("#q-gate-form"), errBox = $("#q-gate-err");
     function fail(msg, el) { errBox.textContent = msg; errBox.hidden = false; if (el) el.focus(); }
@@ -428,19 +431,22 @@
 
       var btn = $("#q-gate-submit"); btn.disabled = true; btn.textContent = "Einen Moment …";
       state.gateName = name; state.gateEmail = email; persist();
-      var data = Object.assign(basePayload(rec), {
+      var data = {
         name: name, phone: "", email: email, consent: "", email_opt_in: "",
-        message: "Infusions-Check · E-Mail-Gate (noch ohne Telefon)",
-        _subject: "Neue Infusions-Anfrage (Infusions-Check — nur E-Mail)"
-      });
-      track("quiz_email_gate_submit", { infusion: data.infusion });
+        message: "Infusions-Check · Start-Gate (Quiz noch nicht beantwortet)",
+        _subject: "Neue Infusions-Anfrage (Infusions-Check — Start)",
+        fbp: cookie("_fbp"),
+        fbc: cookie("_fbc") || (function () { var id = new URLSearchParams(location.search).get("fbclid"); return id ? "fb.1." + Date.now() + "." + id : ""; })(),
+        source: location.href
+      };
+      track("quiz_email_gate_submit", {});
       function proceed(leadId) {
         if (leadId) {
           state.leadId = leadId; persist();
-          try { if (window.fbq) fbq("track", "Lead", { content_name: data.infusion, content_category: "Infusion", stage: "email_gate" }, { eventID: "lead-" + leadId }); } catch (err) {}
+          try { if (window.fbq) fbq("track", "Lead", { content_category: "Infusion", stage: "email_gate" }, { eventID: "lead-" + leadId }); } catch (err) {}
         }
-        fbTrack("QuizEmailCaptured", { content_name: data.infusion });
-        state.step = TOTAL + 2; render(); scrollToCard();
+        fbTrack("QuizEmailCaptured", {});
+        state.step = 1; render(); scrollToCard();
       }
       fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
