@@ -140,13 +140,32 @@
     return { top: ranked[0], alt: ranked[1] || (ranked[0] === "vital" ? "vitamine" : "vital"), scores: s };
   }
 
-  /* --- State -------------------------------------------------------- */
-  var state = { step: -1, answers: {} };  // -1 = Intro, 0..TOTAL-1 = Fragen, TOTAL = Auswertung, TOTAL+1 = Ergebnis
+  /* --- State --------------------------------------------------------
+     -1 = Intro, 0..TOTAL-1 = Fragen, TOTAL = Auswertung,
+     TOTAL+1 = E-Mail-Gate (Name+E-Mail, schaltet die Empfehlung frei),
+     TOTAL+2 = Ergebnis + Telefon/Consent (vervollständigt denselben Lead). */
+  var state = { step: -1, answers: {}, leadId: null, gateName: "", gateEmail: "" };
   try {
     var saved = JSON.parse(sessionStorage.getItem(STORE_KEY) || "null");
-    if (saved && saved.v === QUIZ_VERSION && saved.answers) { state.answers = saved.answers; if (typeof saved.step === "number" && saved.step >= 0 && saved.step < TOTAL) state.step = saved.step; }
+    if (saved && saved.v === QUIZ_VERSION && saved.answers) {
+      state.answers = saved.answers;
+      if (typeof saved.step === "number" && saved.step >= 0 && saved.step <= TOTAL + 2) state.step = saved.step;
+      if (saved.leadId) state.leadId = saved.leadId;
+      if (saved.gateName) state.gateName = saved.gateName;
+      if (saved.gateEmail) state.gateEmail = saved.gateEmail;
+      // Alte Sessions (vor dem E-Mail-Gate) landeten direkt auf dem Ergebnis-Schritt (TOTAL+1) — heute ist das das Gate.
+      // Ohne gespeicherten Namen/E-Mail zurueck auf die letzte Frage schicken, statt ein leeres Gate zu zeigen.
+    }
   } catch (e) {}
-  function persist() { try { sessionStorage.setItem(STORE_KEY, JSON.stringify({ v: QUIZ_VERSION, step: Math.min(state.step, TOTAL - 1), answers: state.answers })); } catch (e) {} }
+  function persist() {
+    try {
+      var stepToSave = state.step > TOTAL + 2 ? TOTAL + 2 : state.step;
+      sessionStorage.setItem(STORE_KEY, JSON.stringify({
+        v: QUIZ_VERSION, step: Math.min(stepToSave, TOTAL + 2), answers: state.answers,
+        leadId: state.leadId, gateName: state.gateName, gateEmail: state.gateEmail
+      }));
+    } catch (e) {}
+  }
 
   var card = $("#quiz");
   var body = $("#q-body");
@@ -165,7 +184,7 @@
     progressWrap.hidden = false;
     var pct = idx >= TOTAL ? 100 : Math.round(((idx) / (TOTAL + 1)) * 100) + 6;
     bar.style.width = pct + "%";
-    barTxt.textContent = idx >= TOTAL ? "Deine Empfehlung" : ("Frage " + (idx + 1) + " von " + TOTAL);
+    barTxt.textContent = idx === TOTAL + 1 ? "Fast geschafft" : idx > TOTAL ? "Deine Empfehlung" : idx === TOTAL ? "Deine Empfehlung" : ("Frage " + (idx + 1) + " von " + TOTAL);
   }
 
   function scrollToCard() {
@@ -180,6 +199,7 @@
     if (state.step < 0) return renderIntro();
     if (state.step < TOTAL) return renderStep(STEPS[state.step]);
     if (state.step === TOTAL) return renderCalc();
+    if (state.step === TOTAL + 1) return renderEmailGate();
     return renderResult();
   }
 
@@ -351,6 +371,84 @@
     return o ? o.l : (v || "");
   }
 
+  /* Basis-Payload aus den Quiz-Antworten — von Gate- und Ergebnis-Formular geteilt. */
+  function basePayload(rec) {
+    var a = state.answers;
+    var befinden = (a.befinden || []).map(function (v) { return labelOf("befinden", v); });
+    return {
+      infusion: PRODUCTS[rec.top].name,
+      ziel: labelOf("ziel", a.ziel),
+      zeitraum: a.zeitraum || "",
+      plz: a.plz || "",
+      arzt_behandlung: a.arzt_behandlung || "", vorerkrankungen: a.vorerkrankungen || "", medikamente: a.medikamente || "",
+      quiz: {
+        version: QUIZ_VERSION,
+        ziel: a.ziel, befinden: a.befinden || [], alltag: a.alltag, erfahrung: a.erfahrung,
+        labels: { ziel: labelOf("ziel", a.ziel), befinden: befinden, alltag: labelOf("alltag", a.alltag), erfahrung: labelOf("erfahrung", a.erfahrung) },
+        empfehlung: rec.top, alternative: rec.alt, scores: rec.scores
+      },
+      fbp: cookie("_fbp"),
+      fbc: cookie("_fbc") || (function () { var id = new URLSearchParams(location.search).get("fbclid"); return id ? "fb.1." + Date.now() + "." + id : ""; })(),
+      source: location.href
+    };
+  }
+
+  /* --- E-Mail-Gate: Name + E-Mail schalten die Empfehlung frei -----
+     Erfasst den Lead schon hier (ohne Telefon) — geht er danach nicht mehr
+     weiter, ist trotzdem nicht alles verloren. Das Ergebnis-Formular
+     ergaenzt denselben Datensatz spaeter um Telefon/Consent. */
+  function renderEmailGate() {
+    var rec = recommend(state.answers);
+    body.innerHTML =
+      '<div class="q-panel q-gate">' +
+        '<div class="q-intro__icon">' + CHECK + '</div>' +
+        '<h2>Deine Empfehlung ist bereit.</h2>' +
+        '<p class="q-hint">Trag deinen Namen und deine E-Mail ein — wir schicken dir deine persönliche Empfehlung sofort dorthin und zeigen sie dir gleich hier.</p>' +
+        '<form id="q-gate-form" novalidate>' +
+          '<div class="form-row"><label for="q-gate-name">Vorname &amp; Name</label><input class="form-control" type="text" id="q-gate-name" name="name" autocomplete="name" value="' + esc(state.gateName) + '" required></div>' +
+          '<div class="form-row"><label for="q-gate-email">E-Mail</label><input class="form-control" type="email" id="q-gate-email" name="email" autocomplete="email" inputmode="email" value="' + esc(state.gateEmail) + '" required></div>' +
+          '<div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
+          '<div class="q-error" id="q-gate-err" hidden></div>' +
+          '<button type="submit" class="btn btn--primary btn--block" id="q-gate-submit">Empfehlung anzeigen</button>' +
+          '<p class="form-privacy">' + SHIELD + ' Nur für deine Empfehlung — kein Spam, keine Weitergabe.</p>' +
+        '</form>' +
+        '<button type="button" class="q-back" id="q-gate-back">' + BACK + ' Zurück</button>' +
+      '</div>';
+    $("#q-gate-back").addEventListener("click", function () { state.step = TOTAL - 1; render(); scrollToCard(); });
+
+    var form = $("#q-gate-form"), errBox = $("#q-gate-err");
+    function fail(msg, el) { errBox.textContent = msg; errBox.hidden = false; if (el) el.focus(); }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errBox.hidden = true;
+      if (form.website && form.website.value) return; // Honeypot: still abbrechen, nicht verraten
+      var name = $("#q-gate-name").value.trim(), email = $("#q-gate-email").value.trim();
+      if (name.length < 2) return fail("Bitte gib deinen Namen ein.", $("#q-gate-name"));
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail("Bitte gib eine gültige E-Mail-Adresse ein.", $("#q-gate-email"));
+
+      var btn = $("#q-gate-submit"); btn.disabled = true; btn.textContent = "Einen Moment …";
+      state.gateName = name; state.gateEmail = email; persist();
+      var data = Object.assign(basePayload(rec), {
+        name: name, phone: "", email: email, consent: "", email_opt_in: "",
+        message: "Infusions-Check · E-Mail-Gate (noch ohne Telefon)",
+        _subject: "Neue Infusions-Anfrage (Infusions-Check — nur E-Mail)"
+      });
+      track("quiz_email_gate_submit", { infusion: data.infusion });
+      function proceed(leadId) {
+        if (leadId) {
+          state.leadId = leadId; persist();
+          try { if (window.fbq) fbq("track", "Lead", { content_name: data.infusion, content_category: "Infusion", stage: "email_gate" }, { eventID: "lead-" + leadId }); } catch (err) {}
+        }
+        fbTrack("QuizEmailCaptured", { content_name: data.infusion });
+        state.step = TOTAL + 2; render(); scrollToCard();
+      }
+      fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (res) { proceed(res && res.id); })
+        .catch(function () { proceed(null); });
+    });
+  }
+
   function renderResult() {
     var a = state.answers;
     var rec = recommend(a);
@@ -364,6 +462,7 @@
       befinden.length ? "<b>Passt zu deinem Befinden:</b> " + esc(befinden.join(" · ")) + "." : "",
       "<b>Ärztlich abgeklärt und individuell abgestimmt</b> — verabreicht von diplomierten Pflegefachfrauen bei dir zuhause."
     ].filter(Boolean);
+    var haveLead = !!state.leadId;
 
     body.innerHTML =
       '<div class="q-panel q-result">' +
@@ -375,19 +474,19 @@
         '</div>' +
         '<ul class="q-why">' + why.map(function (w) { return '<li>' + CHECK + '<span>' + w + '</span></li>'; }).join("") + '</ul>' +
         '<div class="q-alt">Auch spannend für dich: <b>' + esc(alt.name) + '</b> (' + esc(alt.price) + ') — besprechen wir gern in der Beratung. <a href="' + esc(p.url) + '" target="_blank" rel="noopener">Mehr zu ' + esc(p.name) + ' →</a></div>' +
+        (haveLead ? '<p class="q-gate-sent">' + CHECK + ' Deine Empfehlung ist unterwegs an <b>' + esc(state.gateEmail) + '</b>.</p>' : '') +
         '<form class="q-form" id="q-form" novalidate>' +
-          '<h3>Kostenlose Erstberatung sichern</h3>' +
-          '<p>Unser Team meldet sich meist noch am selben Werktag. Deine Empfehlung mit allen Details schicken wir dir per E-Mail.</p>' +
-          '<div class="form-row"><label for="q-name">Vorname &amp; Name</label><input class="form-control" type="text" id="q-name" name="name" autocomplete="name" required></div>' +
-          '<div class="form-row--split">' +
-            '<div><label for="q-phone">Telefon</label><input class="form-control" type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="079 123 45 67" required></div>' +
-            '<div><label for="q-email">E-Mail</label><input class="form-control" type="email" id="q-email" name="email" autocomplete="email" inputmode="email" required></div>' +
-          '</div>' +
+          '<h3>Bereit für die kostenlose Erstberatung?</h3>' +
+          '<p>Trag deine Telefonnummer ein — unser Team meldet sich meist noch am selben Werktag.</p>' +
+          (haveLead ? '' :
+            '<div class="form-row"><label for="q-name">Vorname &amp; Name</label><input class="form-control" type="text" id="q-name" name="name" autocomplete="name" value="' + esc(state.gateName) + '" required></div>' +
+            '<div class="form-row"><label for="q-email">E-Mail</label><input class="form-control" type="email" id="q-email" name="email" autocomplete="email" inputmode="email" value="' + esc(state.gateEmail) + '" required></div>') +
+          '<div class="form-row"><label for="q-phone">Telefon</label><input class="form-control" type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="079 123 45 67" required></div>' +
           '<div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
           '<label class="form-consent"><input type="checkbox" id="q-consent" name="consent" required>' +
             '<span>Ich bin einverstanden, dass die Pflegepartner AG mich zu meiner Anfrage per Telefon und E-Mail kontaktiert und mir Erinnerungen zu meiner Empfehlung schickt. Abmeldung jederzeit möglich. <a href="https://pflegepartner.ch/privacy-policy" target="_blank" rel="noopener">Datenschutz</a></span></label>' +
           '<div class="q-error" id="q-form-err" hidden></div>' +
-          '<button type="submit" class="btn btn--primary btn--block" id="q-submit">Kostenlose Erstberatung sichern</button>' +
+          '<button type="submit" class="btn btn--primary btn--block" id="q-submit">Jetzt Rückruf vereinbaren</button>' +
           '<p class="form-privacy">' + SHIELD + ' Deine Daten behandeln wir vertraulich und geben sie nicht weiter. Kein Abo, keine versteckten Kosten.</p>' +
           '<p class="q-form__call">Lieber direkt anrufen? <a href="tel:+41445250220">044 525 02 20</a></p>' +
         '</form>' +
@@ -398,11 +497,14 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       errBox.hidden = true;
-      var name = $("#q-name").value.trim(), phone = $("#q-phone").value.trim(), email = $("#q-email").value.trim();
+      if (form.website && form.website.value) return; // Honeypot
+      var name = haveLead ? state.gateName : $("#q-name").value.trim();
+      var email = haveLead ? state.gateEmail : $("#q-email").value.trim();
+      var phone = $("#q-phone").value.trim();
       var digits = phone.replace(/\D/g, "");
-      if (name.length < 2) return fail("Bitte gib deinen Namen ein.", $("#q-name"));
+      if (!haveLead && name.length < 2) return fail("Bitte gib deinen Namen ein.", $("#q-name"));
       if (digits.length < 9 || digits.length > 15) return fail("Bitte gib eine gültige Telefonnummer ein (z.B. 079 123 45 67).", $("#q-phone"));
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail("Bitte gib eine gültige E-Mail-Adresse ein.", $("#q-email"));
+      if (!haveLead && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail("Bitte gib eine gültige E-Mail-Adresse ein.", $("#q-email"));
       if (!$("#q-consent").checked) return fail("Bitte bestätige, dass wir dich kontaktieren dürfen.", $("#q-consent"));
 
       var btn = $("#q-submit"); btn.disabled = true; btn.textContent = "Wird gesendet …";
@@ -411,37 +513,21 @@
         " · Alltag: " + labelOf("alltag", a.alltag) +
         " · Erfahrung: " + labelOf("erfahrung", a.erfahrung) +
         " · Empfehlung: " + p.name + " · Alternative: " + alt.name;
-      var data = {
-        infusion: p.name,
-        ziel: labelOf("ziel", a.ziel),
-        zeitraum: a.zeitraum || "",
-        plz: a.plz || "",
+      var data = Object.assign(basePayload(rec), {
         name: name, phone: phone, email: email,
-        message: summary,
-        consent: "ja",
-        email_opt_in: "ja",
-        arzt_behandlung: a.arzt_behandlung || "", vorerkrankungen: a.vorerkrankungen || "", medikamente: a.medikamente || "",
-        quiz: {
-          version: QUIZ_VERSION,
-          ziel: a.ziel, befinden: a.befinden || [], alltag: a.alltag, erfahrung: a.erfahrung,
-          labels: { ziel: labelOf("ziel", a.ziel), befinden: befinden, alltag: labelOf("alltag", a.alltag), erfahrung: labelOf("erfahrung", a.erfahrung) },
-          empfehlung: rec.top, alternative: rec.alt, scores: rec.scores
-        },
-        website: form.website ? form.website.value : "",
-        fbp: cookie("_fbp"),
-        fbc: cookie("_fbc") || (function () { var id = new URLSearchParams(location.search).get("fbclid"); return id ? "fb.1." + Date.now() + "." + id : ""; })(),
-        source: location.href,
+        message: summary, consent: "ja", email_opt_in: "ja",
         _subject: "Neue Infusions-Anfrage (Infusions-Check)"
-      };
-      track("lead_submit", { infusion: p.name, ziel: data.ziel, zeitraum: data.zeitraum, funnel: "quiz" });
+      });
+      if (haveLead) data.update_id = state.leadId;
+      track("lead_submit", { infusion: p.name, ziel: data.ziel, zeitraum: data.zeitraum, funnel: "quiz", completed_gate: haveLead });
       function done(leadId) {
         try { sessionStorage.removeItem(STORE_KEY); } catch (e) {}
         window.location.href = THANKS_URL + "?quelle=quiz&empfehlung=" + encodeURIComponent(rec.top) + (leadId ? "&lead=" + encodeURIComponent(leadId) : "");
       }
       fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
-        .then(function (res) { done(res && res.id); })
-        .catch(function () { done(); });
+        .then(function (res) { done((res && res.id) || state.leadId); })
+        .catch(function () { done(state.leadId); });
     });
   }
 

@@ -163,3 +163,15 @@ body.q-page { padding-bottom: 0; }
 
 /* hidden-Attribut gewinnt immer (auch gegen display:flex/grid) */
 .q-progress[hidden], .q-panel[hidden], .q-msg[hidden], .q-error[hidden], [hidden] { display: none !important; }
+
+/* --- E-Mail-Gate (Name + E-Mail vor der Enthuellung) --------------- */
+.q-gate { text-align: center; padding: .4rem 0 .2rem; }
+.q-gate .q-intro__icon { width: 60px; height: 60px; border-radius: 50%; background: var(--pp-rose-tint); color: var(--pp-red); display: grid; place-items: center; margin: 0 auto 1rem; }
+.q-gate .q-intro__icon svg { width: 30px; height: 30px; }
+.q-gate h2 { font-size: clamp(1.3rem, 3.6vw, 1.7rem); margin-bottom: .4rem; }
+.q-gate .q-hint { color: var(--pp-ink-soft); max-width: 30rem; margin: 0 auto 1.3rem; }
+.q-gate form { max-width: 24rem; margin: 0 auto; text-align: left; }
+.q-gate .btn--block { font-size: 1.05rem; padding: 1.05rem 1.4rem; margin-top: .3rem; }
+.q-gate .q-back { display: inline-flex; margin-top: 1.1rem; }
+.q-gate-sent { font-size: .9rem; color: var(--pp-ink-soft); background: var(--pp-rose-tint); border-radius: 10px; padding: .6rem .85rem; margin: 0 0 1.1rem; }
+.q-gate-sent svg { width: 15px; height: 15px; color: var(--pp-red); vertical-align: -2px; margin-right: .3rem; }
