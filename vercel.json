@@ -98,7 +98,7 @@
           "value": "quiz.pflegepartner.ch"
         }
       ],
-      "destination": "/quiz.html"
+      "destination": "/start.html"
     },
     {
       "source": "/quiz",
@@ -111,6 +111,22 @@
     {
       "source": "/infusions-check",
       "destination": "/quiz.html"
+    },
+    {
+      "source": "/start",
+      "destination": "/start.html"
+    },
+    {
+      "source": "/pflege-check",
+      "destination": "/pflege-check.html"
+    },
+    {
+      "source": "/spitex-check",
+      "destination": "/pflege-check.html"
+    },
+    {
+      "source": "/spitex",
+      "destination": "/pflege-check.html"
     },
     {
       "source": "/",
