@@ -8,7 +8,7 @@
   /* --- KONFIG: vor Livegang anpassen ------------------------------ */
   // Formspree / Make-Endpoint für Lead-Weiterleitung (Zieladresse intern konfigurieren).
   // Solange leer, wird kein Request gesendet (Seite funktioniert trotzdem: Tracking + /danke).
-  var FORM_ENDPOINT = "https://pflegepartner-leads-production.up.railway.app/api/lead";
+  var FORM_ENDPOINT = "https://leads.pflegepartner.ch/api/lead";
   // Lokaler Test: Landingpage auf localhost spricht das lokale Leads-Dashboard an
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     FORM_ENDPOINT = "http://localhost:4174/api/lead";

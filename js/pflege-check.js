@@ -16,7 +16,7 @@
   if (!root) return;
 
   /* --- KONFIG ------------------------------------------------------ */
-  var FORM_ENDPOINT = "https://pflegepartner-leads-production.up.railway.app/api/lead";
+  var FORM_ENDPOINT = "https://leads.pflegepartner.ch/api/lead";
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     FORM_ENDPOINT = "http://localhost:4174/api/lead";
   }
