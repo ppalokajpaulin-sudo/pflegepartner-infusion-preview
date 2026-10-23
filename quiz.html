@@ -20,10 +20,10 @@
        /quiz                   Infusions-Check (diese Seite)
        /quiz?bereich=pflege    Pflege-Check fuer Angehoerige (views/pflege.html)
        /quiz?bereich=wahl      Auswahl "Worum geht es?" (views/wahl.html)
-     Diese Seite schickt Besucher ohne Anzeigen-Parameter zuerst zur Auswahl. Direkt zum Infusions-Check geht es weiter fuer:
-     jeden Besuch mit Kampagnen-Parametern (utm_*, fbclid, gclid: Anzeigen und Social-Klicks wie bisher), Klicks von den Produktseiten
-     (*.pflegepartner.ch), ?bereich=infusion und ?t=infusion. Die Auswahl sehen also Besucher ohne Parameter (WhatsApp, Flyer, direkt getippt).
-     Steht vor dem Pixel, damit ein weitergeleiteter Besuch nicht doppelt als PageView zaehlt. -->
+     Diese Seite schickt JEDEN Besucher zuerst zur Auswahl "Worum geht es?" (Infusionen oder Pflege & Spitex), auch Klicks aus Anzeigen:
+     utm_*, fbclid und gclid werden an die Auswahl und von dort weiter an den gewaehlten Check mitgegeben, die Zuordnung der Kampagne bleibt.
+     Direkt zum Infusions-Check geht es nur fuer Klicks von den Produktseiten (*.pflegepartner.ch, dort steht ausdruecklich "Infusions-Check"),
+     ?bereich=infusion und ?t=infusion. Steht vor dem Pixel, damit ein weitergeleiteter Besuch nicht doppelt als PageView zaehlt. -->
 <script>
 (function () {
   try {
@@ -41,8 +41,6 @@
     /* Schon ausdruecklich gewaehlt: nicht noch einmal umleiten (sonst droht eine Schleife, falls die Umschreibung einmal fehlt) */
     if (b) { if (local && (b === "pflege" || b === "wahl")) go(b); return; }
     if (t === "spitex") { go("pflege"); return; }
-    var keys = Array.from(q.keys());
-    if (q.has("fbclid") || q.has("gclid") || keys.some(function (k) { return k.indexOf("utm_") === 0; })) return;
     var ref = ""; try { ref = new URL(document.referrer).hostname; } catch (e) {}
     if (/(^|\.)pflegepartner\.ch$/.test(ref)) return;
     go("wahl");

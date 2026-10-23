@@ -16,7 +16,7 @@ Es gibt nur noch **`https://vitamine.pflegepartner.ch/quiz`**. Der Server wählt
 
 | Adresse | Zeigt |
 |---|---|
-| `/quiz` | Infusions-Check (`quiz.html`). Besucher **ohne** Anzeigen-Parameter (`utm_*`, `fbclid`, `gclid`) und ohne Klick von einer Produktseite sehen zuerst die Auswahl |
+| `/quiz` | Zuerst die Auswahl «Worum geht es?» für **alle** Besucher, auch aus Anzeigen (`utm_*`, `fbclid`, `gclid` werden mitgegeben). Direkt zum Infusions-Check (`quiz.html`) geht es nur nach einem Klick von einer Produktseite (`*.pflegepartner.ch`) |
 | `/quiz?bereich=wahl` | Auswahl «Worum geht es?» (`views/wahl.html`) |
 | `/quiz?bereich=pflege` | Pflege-Check für Angehörige (`views/pflege.html`) |
 | `/quiz?bereich=infusion` | Infusions-Check, nie die Auswahl |
