@@ -10,7 +10,7 @@
 <meta property="og:title" content="Worum geht es? Infusionen oder Pflege &amp; Spitex">
 <meta property="og:description" content="Zwei kurze Checks führen zur passenden Beratung der Pflegepartner AG.">
 <meta property="og:image" content="https://vitamine.pflegepartner.ch/assets/img/hero-pflegefachfrau.jpg">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- Tracking: Meta Pixel aktiv. GTM / Google Ads: IDs folgen. -->
@@ -81,7 +81,7 @@
 <body>
 <header><div class="wrap">
   <a class="logo" href="https://pflegepartner.ch" aria-label="Pflegepartner AG">
-    <img src="assets/img/logo-icon.png" alt="" aria-hidden="true">
+    <img src="/assets/img/logo-icon.png" alt="" aria-hidden="true">
     Pflegepartner AG
   </a>
   <a class="tel" href="tel:+41445250220">044 525 02 20</a>
@@ -95,7 +95,7 @@
 
 <section class="choose"><div class="wrap">
   <div class="cards">
-    <a class="card" data-t="infusion" href="quiz.html?t=infusion">
+    <a class="card" data-t="infusion" href="/quiz?bereich=infusion">
       <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5c6 8 12 13.5 12 20.5a12 12 0 0 1-24 0C12 18.5 18 13 24 5z" fill="#DD9F9E"/><path d="M24 19v13M17.5 25.5h13" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
       <span class="eyebrow">Infusionen</span>
       <h2>Infusionen zuhause</h2>
@@ -103,7 +103,7 @@
       <span class="meta">Infusions-Check · 7 Fragen · 60 Sekunden</span>
       <span class="go">Zum Infusions-Check</span>
     </a>
-    <a class="card" data-t="spitex" href="pflege-check.html">
+    <a class="card" data-t="spitex" href="/quiz?bereich=pflege">
       <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 22.5 24 8l18 14.5V42H6z" fill="#DD9F9E"/><path d="M24 19v13M17.5 25.5h13" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
       <span class="eyebrow">Pflege und Spitex</span>
       <h2>Pflege zuhause für Angehörige</h2>
@@ -122,13 +122,15 @@
 <script>
 /* Die Wahl nimmt Anzeigen-Parameter (utm_*, fbclid) mit, damit die Zuordnung der Kampagne erhalten bleibt. */
 (function () {
-  var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname), ext = local ? ".html" : "";
+  var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  /* Eine Adresse fuer alles: /quiz, die Ansicht kommt aus ?bereich= (der Server waehlt sie, siehe vercel.json).
+     Lokal (reiner Datei-Server ohne Umschreibung) geht es direkt zur Datei. */
   function target(t) {
     var p = new URLSearchParams(location.search);
     p.delete("t");
-    if (t === "infusion") p.set("t", "infusion");
-    var s = p.toString();
-    return (t === "infusion" ? "/quiz" : "/pflege-check") + ext + (s ? "?" + s : "") + location.hash;
+    p.set("bereich", t === "infusion" ? "infusion" : "pflege");
+    var base = local ? (t === "infusion" ? "/quiz.html" : "/views/pflege.html") : "/quiz";
+    return base + "?" + p.toString() + location.hash;
   }
   var cards = document.querySelectorAll(".card[data-t]");
   for (var i = 0; i < cards.length; i++) {

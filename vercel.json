@@ -1,4 +1,47 @@
 {
+  "redirects": [
+    {
+      "source": "/start",
+      "destination": "/quiz?bereich=wahl",
+      "permanent": false
+    },
+    {
+      "source": "/pflege-check",
+      "destination": "/quiz?bereich=pflege",
+      "permanent": false
+    },
+    {
+      "source": "/spitex-check",
+      "destination": "/quiz?bereich=pflege",
+      "permanent": false
+    },
+    {
+      "source": "/spitex",
+      "destination": "/quiz?bereich=pflege",
+      "permanent": false
+    },
+    {
+      "source": "/check",
+      "destination": "/quiz",
+      "permanent": false
+    },
+    {
+      "source": "/infusions-check",
+      "destination": "/quiz?bereich=infusion",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "quiz.pflegepartner.ch"
+        }
+      ],
+      "destination": "https://vitamine.pflegepartner.ch/quiz",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
@@ -91,42 +134,30 @@
       "destination": "/vitamine.html"
     },
     {
-      "source": "/",
+      "source": "/quiz",
       "has": [
         {
-          "type": "host",
-          "value": "quiz.pflegepartner.ch"
+          "type": "query",
+          "key": "bereich",
+          "value": "pflege"
         }
       ],
-      "destination": "/start.html"
+      "destination": "/views/pflege.html"
+    },
+    {
+      "source": "/quiz",
+      "has": [
+        {
+          "type": "query",
+          "key": "bereich",
+          "value": "wahl"
+        }
+      ],
+      "destination": "/views/wahl.html"
     },
     {
       "source": "/quiz",
       "destination": "/quiz.html"
-    },
-    {
-      "source": "/check",
-      "destination": "/quiz.html"
-    },
-    {
-      "source": "/infusions-check",
-      "destination": "/quiz.html"
-    },
-    {
-      "source": "/start",
-      "destination": "/start.html"
-    },
-    {
-      "source": "/pflege-check",
-      "destination": "/pflege-check.html"
-    },
-    {
-      "source": "/spitex-check",
-      "destination": "/pflege-check.html"
-    },
-    {
-      "source": "/spitex",
-      "destination": "/pflege-check.html"
     },
     {
       "source": "/",

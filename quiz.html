@@ -16,24 +16,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/quiz.css?v=20260909">
-<!-- Eingangsweiche: /quiz und /check fragen zuerst, worum es geht (start.html). Direkt zum Infusions-Check geht es weiter fuer:
+<!-- Eine Adresse fuer alles: /quiz. Dahinter liegen drei Ansichten, die der Server nach ?bereich= waehlt (vercel.json):
+       /quiz                   Infusions-Check (diese Seite)
+       /quiz?bereich=pflege    Pflege-Check fuer Angehoerige (views/pflege.html)
+       /quiz?bereich=wahl      Auswahl "Worum geht es?" (views/wahl.html)
+     Diese Seite schickt Besucher ohne Anzeigen-Parameter zuerst zur Auswahl. Direkt zum Infusions-Check geht es weiter fuer:
      jeden Besuch mit Kampagnen-Parametern (utm_*, fbclid, gclid: Anzeigen und Social-Klicks wie bisher), Klicks von den Produktseiten
-     (*.pflegepartner.ch), ?t=infusion und /infusions-check. Die Auswahl sehen also Besucher ohne Parameter (WhatsApp, Flyer, direkt getippt).
+     (*.pflegepartner.ch), ?bereich=infusion und ?t=infusion. Die Auswahl sehen also Besucher ohne Parameter (WhatsApp, Flyer, direkt getippt).
      Steht vor dem Pixel, damit ein weitergeleiteter Besuch nicht doppelt als PageView zaehlt. -->
 <script>
 (function () {
   try {
     var path = location.pathname.replace(/\/+$/, "") || "/";
-    if (path !== "/quiz" && path !== "/check" && path !== "/quiz.html") return;
-    var q = new URLSearchParams(location.search), t = q.get("t");
-    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname), ext = local ? ".html" : "";
-    if (t === "infusion") return;
-    if (t === "spitex") { location.replace("/pflege-check" + ext + location.search + location.hash); return; }
+    if (path !== "/quiz" && path !== "/quiz.html") return;
+    var q = new URLSearchParams(location.search), t = q.get("t"), b = q.get("bereich");
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    /* Auf dem Server waehlt vercel.json die Ansicht; lokal (reiner Datei-Server) geht es direkt zur Datei. */
+    function go(view) {
+      var p = new URLSearchParams(location.search); p.delete("t"); p.set("bereich", view);
+      var file = { pflege: "/views/pflege.html", wahl: "/views/wahl.html" }[view];
+      location.replace((local ? file : "/quiz") + "?" + p.toString() + location.hash);
+    }
+    if (b === "infusion" || t === "infusion") return;
+    /* Schon ausdruecklich gewaehlt: nicht noch einmal umleiten (sonst droht eine Schleife, falls die Umschreibung einmal fehlt) */
+    if (b) { if (local && (b === "pflege" || b === "wahl")) go(b); return; }
+    if (t === "spitex") { go("pflege"); return; }
     var keys = Array.from(q.keys());
     if (q.has("fbclid") || q.has("gclid") || keys.some(function (k) { return k.indexOf("utm_") === 0; })) return;
     var ref = ""; try { ref = new URL(document.referrer).hostname; } catch (e) {}
     if (/(^|\.)pflegepartner\.ch$/.test(ref)) return;
-    location.replace("/start" + ext + location.search + location.hash);
+    go("wahl");
   } catch (e) {}
 })();
 </script>
