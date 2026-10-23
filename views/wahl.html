@@ -123,6 +123,11 @@
 /* Die Wahl nimmt Anzeigen-Parameter (utm_*, fbclid) mit, damit die Zuordnung der Kampagne erhalten bleibt. */
 (function () {
   var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  /* Die Auswahl steht in der Adresszeile unter dem sauberen /quiz: ?bereich=wahl ist nur der Hinweis fuer den Server. */
+  try {
+    var u = new URL(location.href);
+    if (u.searchParams.get("bereich") === "wahl") { u.searchParams.delete("bereich"); history.replaceState(null, "", u.pathname + u.search + u.hash); }
+  } catch (e) {}
   /* Eine Adresse fuer alles: /quiz, die Ansicht kommt aus ?bereich= (der Server waehlt sie, siehe vercel.json).
      Lokal (reiner Datei-Server ohne Umschreibung) geht es direkt zur Datei. */
   function target(t) {
