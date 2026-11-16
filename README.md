@@ -1,26 +1,19 @@
-# Pflegepartner AG — Infusions-Landingpage (Vorschau)
+# Pflegepartner AG — Check-Seiten (Pflege-Check und Auswahl)
 
-Nicht freigegebene **Vorschau** einer Conversion-Landingpage für die Infusionen
-zuhause von Pflegepartner AG. Erstellt von LUP Studios.
+Statische Site auf **Vercel** (`vercel.json`). Die früheren Infusions-Landingpages
+(Produktseiten, Infusions-Check) sind entfernt: Infusionen sind verschreibungspflichtig,
+Werbung für die Öffentlichkeit ist nicht erlaubt (Entscheid Marijana: keine Preise,
+keine Produktnamen, keine Produktfotos).
 
-Bilder (Hero, Team, Produkte) stammen von pflegepartner.ch und wurden für Web
-optimiert (8.5 MB → ~790 KB).
-
-> ⚠️ Bewusst auf `noindex, nofollow` + `robots.txt Disallow` gesetzt, damit die
-> Vorschau nicht indexiert wird und nicht mit pflegepartner.ch konkurriert.
-> Vor Livegang: Freigabe (Precheck), Tracking-IDs und Formular-Endpoint einsetzen.
-
-## Quiz: eine Adresse für alles (`/quiz`)
-
-Es gibt nur noch **`https://vitamine.pflegepartner.ch/quiz`**. Der Server wählt die Ansicht nach `?bereich=` (Regeln in `vercel.json`):
-
-| Adresse | Zeigt |
+| Adresse | Inhalt |
 |---|---|
-| `/quiz` | Zuerst die Auswahl «Worum geht es?» für **alle** Besucher, auch aus Anzeigen (`utm_*`, `fbclid`, `gclid` werden mitgegeben). Direkt zum Infusions-Check (`quiz.html`) geht es nur nach einem Klick von einer Produktseite (`*.pflegepartner.ch`) |
-| `/quiz?bereich=wahl` | Auswahl «Worum geht es?» (`views/wahl.html`) |
+| `/quiz` | Auswahl «Worum geht es?» (`views/wahl.html`) |
 | `/quiz?bereich=pflege` | Pflege-Check für Angehörige (`views/pflege.html`) |
-| `/quiz?bereich=infusion` | Infusions-Check, nie die Auswahl |
+| `/quiz?bereich=infusion`, `/infusions-check`, `/<produkt>`, `/infusion-*`, `/danke` | leiten auf https://pflegepartner.ch/infusionen/ |
+| `/` (alle Produkt-Subdomains) | leitet auf https://pflegepartner.ch/infusionen/ |
 
-Die früheren Adressen `/start`, `/pflege-check`, `/spitex`, `/spitex-check`, `/check`, `/infusions-check` und `quiz.pflegepartner.ch` leiten auf die passende `/quiz`-Adresse weiter (Anzeigen-Parameter bleiben erhalten), so bricht kein bestehender Link. Die Dateien in `views/` sind nur Bausteine, nirgends verlinkt und `noindex`.
+Die Adressen `/start`, `/pflege-check`, `/spitex`, `/spitex-check`, `/check` und `quiz.pflegepartner.ch`
+leiten weiter, so bricht kein bestehender Link. `leads.pflegepartner.ch` wird per Rewrite
+auf das Railway-Dashboard geleitet.
 
-Die Art der Anfrage erkennt der Leads-Server unabhängig von der Adresse: Der Pflege-Check schickt `ziel = "Pflege-Check (…)"`, alles andere gilt als Infusion. Lokal (reiner Datei-Server ohne Umschreibung) leiten die Seiten direkt auf die Dateien in `views/` um.
+Die gelöschten Seiten bleiben in der Git-Historie.
